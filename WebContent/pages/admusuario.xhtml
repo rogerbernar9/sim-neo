@@ -1,0 +1,163 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" 
+    "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+
+<html xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:p="http://primefaces.org/ui"
+	xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:f="http://java.sun.com/jsf/core"
+	xmlns:ui="http://java.sun.com/jsf/facelets">
+<h:head></h:head>
+<h:body>
+	<p:panel header="Cadastro de usuários">
+		<h:form id="form1">
+			<p:growl></p:growl>
+			<p:panelGrid columns="2">
+
+				<h:outputText value="Nome" />
+				<p:inputText value="#{usuarioMB.usuario.nome}" required="true"
+					requiredMessage="É preciso preencher os campos" />
+
+				<h:outputText value="Matrícula" />
+				<p:inputText value="#{usuarioMB.usuario.matricula}" required="true"
+					requiredMessage="É preciso preencher os campos" />
+
+				<h:outputText value="Senha" />
+				<p:password  value="#{usuarioMB.usuario.senha}" required="true" promptLabel="Digite sua senha" weakLabel="Senha fraca"
+                    goodLabel="Boa senha" strongLabel="Senha forte" requiredMessage="É preciso preencher os campos" />
+
+				<h:outputText value="Cargo" />
+				<p:inputText value="#{usuarioMB.usuario.cargo}" required="true"
+					requiredMessage="É preciso preencher os campos" />
+
+				<h:outputText value="Setor" />
+				<p:inputText value="#{usuarioMB.usuario.setor}" required="true"
+					requiredMessage="É preciso preencher os campos" />
+
+				<h:outputText value="E-mail" />
+				<p:inputText value="#{usuarioMB.usuario.email}" required="true"
+					requiredMessage="É preciso preencher os campos" />
+
+				<h:outputText for="departamento" value="Departamento:" />
+				<p:selectOneMenu id="departamento" value="#{usuarioMB.usuario.depto}"
+					style="width:125px">
+
+					<f:selectItems value="#{usuarioMB.deptos}" var="depto" itemLabel="#{depto.nome}" itemValue="#{depto}" />
+					<f:converter converterId="DeptoConverter"/>
+				</p:selectOneMenu>
+
+				<h:outputText for="perfil" value="Perfil:" />
+				<p:selectOneMenu id="Perfil" value="#{usuarioMB.usuario.perfil}"
+					style="width:125px">
+
+					<f:selectItems value="#{usuarioMB.perfis}" var="perfil" itemLabel="#{perfil.nome}" itemValue="#{perfil}" />
+					<f:converter converterId="PerfilConverter"/>
+				</p:selectOneMenu>
+
+				<p:commandButton value="Gravar" action="#{usuarioMB.gravar}" ajax="true"
+					update=":form1,:form2">
+				</p:commandButton>
+			</p:panelGrid>
+		</h:form>
+	</p:panel>
+<br/>
+	<p:panel header="Manutenção de usuários">
+		<h:form id="form2">
+			<p:growl></p:growl>
+			<p:dataTable value="#{usuarioMB.usuarios}" var="linha"
+				paginator="false">
+				<p:column headerText="Nome">
+					<h:outputText value="#{linha.nome}" />
+				</p:column>
+				<p:column headerText="Matrícula">
+					<h:outputText value="#{linha.matricula}" />
+				</p:column>
+				<p:column headerText="Cargo">
+					<h:outputText value="#{linha.cargo}" />
+				</p:column>
+				<p:column headerText="Setor">
+					<h:outputText value="#{linha.setor}" />
+				</p:column>
+				<p:column headerText="E-mail">
+					<h:outputText value="#{linha.email}" />
+				</p:column>
+				<p:column headerText="Departamento">
+					<h:outputText value="#{linha.depto.nome}" />
+				</p:column>
+				<p:column headerText="Perfil">
+					<h:outputText value="#{linha.perfil.nome}" />
+				</p:column>
+			<p:column headerText="Ações">
+				<h:commandLink onclick="PF('alteracao').show()" ajax="true" update=":form3">
+					<f:ajax execute="@this" render=":form3" />
+					<h:graphicImage library="imagens" name="editar16.png" />
+					<f:setPropertyActionListener target="#{usuarioMB.usuario}"
+						value="#{linha}" />
+				</h:commandLink>
+				<h:commandLink action="#{usuarioMB.excluir}" onclick="if(confirm('Deseja realmente excluir este item ?'))return true;return false">
+					<f:ajax execute="@this" render=":form2" />
+					<h:graphicImage library="imagens" name="excluir16.png" />
+					<f:setPropertyActionListener target="#{usuarioMB.usuario}" value="#{linha}" />
+				</h:commandLink>
+			</p:column>
+			</p:dataTable>
+		</h:form>
+	</p:panel>
+	<p:dialog header="Alterar os dados" widgetVar="alteracao" modal="true">
+		<h:form id="form3">
+		<h:inputHidden value="#{usuarioMB.usuario.codigo}" />
+			<p:growl></p:growl>
+			<p:panelGrid columns="2">
+
+				<h:outputText value="Nome" />
+				<p:inputText value="#{usuarioMB.usuario.nome}" required="true"
+					requiredMessage="É preciso preencher os campos" />
+
+				<h:outputText value="Matrícula" />
+				<p:inputText value="#{usuarioMB.usuario.matricula}" required="true"
+					requiredMessage="É preciso preencher os campos" />
+
+				<h:outputText value="Senha" />
+				<p:inputText value="#{usuarioMB.usuario.senha}" required="true"
+					requiredMessage="É preciso preencher os campos" />
+
+				<h:outputText value="Cargo" />
+				<p:inputText value="#{usuarioMB.usuario.cargo}" required="true"
+					requiredMessage="É preciso preencher os campos" />
+
+				<h:outputText value="Setor" />
+				<p:inputText value="#{usuarioMB.usuario.setor}" required="true"
+					requiredMessage="É preciso preencher os campos" />
+
+				<h:outputText value="E-mail" />
+				<p:inputText value="#{usuarioMB.usuario.email}" required="true"
+					requiredMessage="É preciso preencher os campos" />
+
+				<h:outputText for="departamento" value="Departamento:" />
+				<p:selectOneMenu id="Departamento" value="#{usuarioMB.usuario.depto}"
+					style="width:125px">
+
+					<f:selectItems value="#{usuarioMB.deptos}" var="depto" itemLabel="#{depto.nome}" itemValue="#{depto}" />
+					<f:converter converterId="DeptoConverter"/>
+				</p:selectOneMenu>
+
+
+
+				<h:outputText for="perfil" value="Perfil:" />
+				<p:selectOneMenu id="Perfil" value="#{usuarioMB.usuario.perfil}"
+					style="width:125px">
+
+					<f:selectItems value="#{usuarioMB.perfis}" var="perfil" itemLabel="#{perfil.nome}" itemValue="#{perfil}" />
+					<f:converter converterId="PerfilConverter"/>
+				</p:selectOneMenu>
+
+
+				<p:commandButton value="Alterar" action="#{usuarioMB.editar}" ajax="true" onclick="PF('alteracao').hide()"
+					update=":form2">
+				</p:commandButton>
+			</p:panelGrid>
+		</h:form>
+
+	</p:dialog>
+
+</h:body>
+</html>

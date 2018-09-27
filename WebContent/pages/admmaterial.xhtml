@@ -1,0 +1,130 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" 
+    "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+
+<html xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:p="http://primefaces.org/ui"
+	xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:f="http://java.sun.com/jsf/core"
+	xmlns:ui="http://java.sun.com/jsf/facelets">
+
+<h:head>
+</h:head>
+<h:body>
+	<p:dialog header="Cadastro de material" widgetVar="gravacao" modal="true">
+			<h:form id="form1">
+			<p:growl></p:growl>
+			<p:panelGrid columns="2">
+
+				<h:outputText value="Símbolo" />
+				<p:inputMask value="#{materialMB.material.simbolo}" required="true" mask="99-a-9999-999"
+					requiredMessage="É preciso preencher os campos" />
+
+				<h:outputText value="Descrição" />
+				<p:inputTextarea value="#{materialMB.material.descricao}"
+					required="true" rows="8" cols="60" minQueryLength="7"
+					requiredMessage="É preciso preencher os campos" />
+
+				<h:outputText value="Preço por UF" />
+				<p:inputText value="#{materialMB.material.precoUf}" required="true"
+					requiredMessage="É preciso preencher os campos">
+					<f:convertNumber  maxFractionDigits="2" minIntegerDigits="1"  />
+				</p:inputText>
+
+				<h:outputText for="uf1" value="Unidades de Fornecimento" />
+				<p:selectOneMenu id="uf1" value="#{materialMB.material.uf}">
+
+					<f:selectItems value="#{materialMB.unidades}" var="#{uf}"
+						itemLabel="#{uf.descricao}"
+						itemValue="#{uf}" />
+					<f:converter converterId="UfConverter" />
+
+				</p:selectOneMenu>
+
+				<p:commandButton value="Gravar" action="#{materialMB.gravar}" ajax="true" onclick="PF('gravacao').hide()" update=":form1,:form2" >
+				</p:commandButton>
+			</p:panelGrid>
+		</h:form>
+	
+	</p:dialog>
+	<br />
+	<p:panel header="Catálogo de materiais">
+		<h:form id="form2">
+			<p:growl></p:growl>
+
+			<p:dataTable value="#{materialMB.materiais}" var="linha" widgetVar="catalogoMaterial"
+				paginator="true" rows="12">
+ 
+				<p:column headerText="Símbolo" width="11%" filterMatchMode="contains" filterBy="#{linha.simbolo}">
+					<h:outputText value="#{linha.simbolo}" />
+				</p:column>
+				<p:column headerText="Descrição" width="68%" filterMatchMode="contains" filterBy="#{linha.descricao}" filterStyle="width: 50%;" filterPosition="bottom">
+					<h:outputText value="#{linha.descricao}" />
+				</p:column>				
+				<p:column headerText="Preço" width="8%">
+					<h:outputText value="#{linha.precoUf}" />
+				</p:column>
+				<p:column headerText="UF" width="5%">
+					<h:outputText value="#{linha.uf.simboloUnidade}" />
+				</p:column>
+				<p:column headerText="Ações" width="6%">
+				<h:commandLink onclick="PF('gravacao').show()" ajax="true" update=":form3">
+					<f:ajax execute="@this" render=":form3" />
+					<h:graphicImage library="imagens" name="incluir16.png" title="Incluir" />
+				</h:commandLink>
+				<h:commandLink onclick="PF('alteracao').show()" ajax="true" update=":form3">
+					<f:ajax execute="@this" render=":form3" />
+					<h:graphicImage library="imagens" name="editar16.png" title="Alterar" />
+					<f:setPropertyActionListener target="#{materialMB.material}"
+						value="#{linha}" />
+				</h:commandLink>
+				<h:commandLink action="#{materialMB.excluir}" onclick="if(confirm('Deseja realmente excluir este item ?'))return true;return false">
+					<f:ajax execute="@this" render=":form2" />
+					<h:graphicImage library="imagens" name="excluir16.png" title="Deletar" />
+					<f:setPropertyActionListener target="#{materialMB.material}" value="#{linha}" />
+				</h:commandLink>
+				</p:column>
+			</p:dataTable>
+		</h:form>
+	</p:panel>
+	<p:dialog header="Alterar os dados" widgetVar="alteracao" modal="true">
+			<h:form id="form3">
+			<p:growl></p:growl>
+			<h:inputHidden value="#{materialMB.material.codigo}" />
+			<p:panelGrid columns="2">
+
+				<h:outputText value="Símbolo" />
+				<p:inputMask value="#{materialMB.material.simbolo}" required="true" mask="99-a-9999-999"
+					requiredMessage="É preciso preencher os campos" />
+
+				<h:outputText value="Descrição" />
+				<p:inputTextarea value="#{materialMB.material.descricao}"
+					required="true" rows="8" cols="60" minQueryLength="7"
+					requiredMessage="É preciso preencher os campos" />
+
+				<h:outputText value="Preço por UF" />
+				<p:inputText value="#{materialMB.material.precoUf}" required="true"
+					requiredMessage="É preciso preencher os campos">
+					<f:convertNumber  maxFractionDigits="2" minIntegerDigits="1" />
+				</p:inputText>
+
+				<h:outputText for="uf1" value="Unidades de Fornecimento" />
+				<p:selectOneMenu id="uf1" value="#{materialMB.material.uf}">
+
+					<f:selectItems value="#{materialMB.unidades}" var="#{uf}"
+						itemLabel="#{uf.descricao}"
+						itemValue="#{uf}" />
+					<f:converter converterId="UfConverter" />
+
+				</p:selectOneMenu>
+
+				<p:commandButton value="Gravar" action="#{materialMB.editar}" ajax="true" onclick="PF('alteracao').hide()"
+					update=":form1,:form2">
+				</p:commandButton>
+			</p:panelGrid>
+		</h:form>
+	
+	</p:dialog>
+	
+</h:body>
+
+</html>

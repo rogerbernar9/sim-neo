@@ -1,0 +1,129 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" 
+    "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+
+<html xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:p="http://primefaces.org/ui"
+	xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:f="http://java.sun.com/jsf/core"
+	xmlns:ui="http://java.sun.com/jsf/facelets">
+
+<h:head>
+</h:head>
+<h:body>
+	<p:panel header="Manutenção de Fornecedores">
+		<h:form id="form1">
+			<p:growl></p:growl>
+			<p:panelGrid columns="2">
+
+				<h:outputText value="Nome fantasia:" />
+				<p:inputText value="#{fornecedorMB.fornecedor.nomeFantasia}" required="true"
+					requiredMessage="É preciso preencher os campos" />
+					
+				<h:outputText value="Razão social:" />
+				<p:inputText value="#{fornecedorMB.fornecedor.razaoSocial}" required="true"
+					requiredMessage="É preciso preencher os campos" />
+
+				<h:outputText value="CNPJ:" />
+				<p:inputText value="#{fornecedorMB.fornecedor.cnpj}" required="true"
+					requiredMessage="É preciso preencher os campos" />
+
+				<h:outputText value="Logradouro:" />
+				<p:inputText value="#{fornecedorMB.endereco.logradouro}" required="true"
+					requiredMessage="É preciso preencher os campos" />
+
+				<h:outputText value="Número:" />
+				<p:inputText value="#{fornecedorMB.endereco.numero}" required="true"
+					requiredMessage="É preciso preencher os campos" />
+
+				<h:outputText value="CEP:" />
+				<p:inputText value="#{fornecedorMB.endereco.cep}" required="true"
+					requiredMessage="É preciso preencher os campos" />
+
+
+
+				<p:commandButton value="Gravar" action="#{fornecedorMB.gravar}"
+					ajax="true" update=":form1,:form2">
+				</p:commandButton>
+			</p:panelGrid>
+		</h:form>
+		</p:panel>
+	<br/>
+	<p:panel header="Fornecedores cadastrados">
+		<h:form id="form2">
+			<p:growl></p:growl>
+			<p:dataTable value="#{fornecedorMB.fornecedores}" var="linha"
+				paginator="false">
+				<p:column headerText="Nome">
+					<h:outputText value="#{linha.nomeFantasia}" />
+				</p:column>
+				<p:column headerText="CNPJ">
+					<h:outputText value="#{linha.cnpj}" />
+				</p:column>
+				<p:column headerText="Razão social">
+					<h:outputText value="#{linha.razaoSocial}" />
+				</p:column>
+				<p:column headerText="Endereço">
+					<h:outputText value="#{linha.endereco.logradouro}, #{linha.endereco.numero}" />
+				</p:column>
+				<p:column headerText="Ações">
+					<p:column headerText="Ações">
+						<h:commandLink onclick="PF('alteracao').show()" ajax="true"
+							update=":form3">
+							<f:ajax execute="@this" render=":form3" />
+							<h:graphicImage library="imagens" name="editar16.png" />
+							<f:setPropertyActionListener target="#{fornecedorMB.fornecedor}" value="#{linha}" />
+						</h:commandLink>
+						<h:commandLink action="#{fornecedorMB.excluir}" onclick="if(confirm('Deseja realmente excluir este item ?'))return true;return false">
+							<f:ajax execute="@this" render=":form2" />
+							<h:graphicImage library="imagens" name="excluir16.png" />
+							<f:setPropertyActionListener target="#{fornecedorMB.fornecedor}"
+								value="#{linha}" />
+						</h:commandLink>
+
+					</p:column>
+				</p:column>
+			</p:dataTable>
+		</h:form>
+	</p:panel>
+	<br />
+	<p:dialog header="Alterar os dados" widgetVar="alteracao" modal="true">
+		<h:form id="form3">
+		<p:growl></p:growl>
+				<h:inputHidden value="#{fornecedorMB.fornecedor.codigo}"></h:inputHidden>
+				<h:inputHidden value="#{fornecedorMB.fornecedor.endereco.codigo}"></h:inputHidden>
+				<p:panelGrid columns="2">
+				
+				<h:outputText value="Nome fantasia:" />
+				<p:inputText value="#{fornecedorMB.fornecedor.nomeFantasia}" required="true"
+					requiredMessage="É preciso preencher os campos" />
+					
+				<h:outputText value="Razão social:" />
+				<p:inputText value="#{fornecedorMB.fornecedor.razaoSocial}" required="true"
+					requiredMessage="É preciso preencher os campos" />
+
+				<h:outputText value="CNPJ:" />
+				<p:inputText value="#{fornecedorMB.fornecedor.cnpj}" required="true"
+					requiredMessage="É preciso preencher os campos" />
+
+				<h:outputText value="Logradouro:" />
+				<p:inputText value="#{fornecedorMB.fornecedor.endereco.logradouro}" required="true"
+					requiredMessage="É preciso preencher os campos" />
+
+				<h:outputText value="Número:" />
+				<p:inputText value="#{fornecedorMB.fornecedor.endereco.numero}" required="true"
+					requiredMessage="É preciso preencher os campos" />
+
+				<h:outputText value="CEP:" />
+				<p:inputText value="#{fornecedorMB.fornecedor.endereco.cep}" required="true"
+					requiredMessage="É preciso preencher os campos" />
+
+				<p:commandButton value="Gravar" action="#{fornecedorMB.editar}" onclick="PF('alteracao').hide()"
+					ajax="true" update=":form2">
+				</p:commandButton>
+
+				</p:panelGrid>
+			</h:form>
+	</p:dialog>
+
+</h:body>
+</html>

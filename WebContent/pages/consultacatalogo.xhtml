@@ -1,0 +1,40 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" 
+    "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+
+<html xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:p="http://primefaces.org/ui"
+	xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:f="http://java.sun.com/jsf/core"
+	xmlns:ui="http://java.sun.com/jsf/facelets">
+
+<h:head>
+</h:head>
+<h:body>
+	<br />
+	<p:panel header="Catálogo de materiais">
+		<h:form id="form2">
+			<p:growl></p:growl>
+
+			<p:dataTable value="#{materialMB.materiais}" var="linha" widgetVar="catalogoMaterial"
+				paginator="true" rows="12">
+ 
+				<p:column headerText="Símbolo" width="11%" filterMatchMode="contains" filterBy="#{linha.simbolo}">
+					<h:outputText value="#{linha.simbolo}" />
+				</p:column>
+				<p:column headerText="Descrição" width="68%" filterMatchMode="contains" filterBy="#{linha.descricao}" filterStyle="width: 50%;" filterPosition="bottom">
+					<h:outputText value="#{linha.descricao}" />
+				</p:column>				
+				<p:column headerText="Preço" width="8%">
+					<h:outputText value="#{linha.precoUf}" />
+				</p:column>
+				<p:column headerText="UF" width="5%">
+					<h:outputText value="#{linha.uf.simboloUnidade}" />
+				</p:column>
+
+			</p:dataTable>
+		</h:form>
+	</p:panel>
+	
+</h:body>
+
+</html>
