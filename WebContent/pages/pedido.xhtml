@@ -1,0 +1,178 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" 
+    "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+
+<html xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:p="http://primefaces.org/ui"
+	xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:f="http://java.sun.com/jsf/core"
+	xmlns:ui="http://java.sun.com/jsf/facelets">
+
+
+<h:head>
+</h:head>
+<h:body>
+	<p:panel header="Emissão de requisição de material">
+		<h:form id="form1">
+		    <p:wizard flowListener="#{pedidoMB.processaPedido}">
+		        <p:tab id="ped1" title="1 - Entre com o símbolo">
+		            <p:panel header="Material a ser pedido">
+						<p:growl></p:growl>
+						<p:messages></p:messages>
+						<h:panelGrid columns="2">
+		                    <h:outputText value="Símbolo do ítem: " />
+							<p:inputMask value="#{pedidoMB.simboloMaterial}" required="true"
+								label="Símbolo" id="simboloMat" mask="99-a-9999-999"
+								style="text-transform: uppercase"
+								requiredMessage="É preciso preencher os campos"
+								disabled="#{(pedidoMB.pulo)}" />
+
+							<h:outputText value="Desejo emitir sem símbolo: " />
+		                    <p:selectBooleanCheckbox value="#{pedidoMB.pulo}" id="chkPulo"  >
+		                    <p:ajax event="change" update="simboloMat" />
+		                    </p:selectBooleanCheckbox>
+		                </h:panelGrid>	
+		            </p:panel>
+
+		        </p:tab>
+		        <p:tab id="ped2" title="2 - Dados do pedido">
+	        	
+		            <p:panel header="Dados do item a ser pedido" rendered="#{pedidoMB.simboloMaterial == null}" id="pan1">
+		                <p:messages />
+		                <h:panelGrid columns="2">
+		                
+						<h:outputText value="Descrição" id="optDesc" />
+						<p:inputTextarea value="#{pedidoMB.material.descricao}" id="itaDesc"
+							required="true" rows="8" cols="60" minQueryLength="7"
+							requiredMessage="É preciso preencher os campos" />
+		
+						<h:outputText value="Preço por UF" id="optPreco"/>
+						<p:inputText value="#{pedidoMB.material.precoUf}" required="true" id="ipPreco"
+							requiredMessage="É preciso preencher os campos">
+							<f:convertNumber  maxFractionDigits="2" minIntegerDigits="1"  />
+						</p:inputText>
+		
+						<h:outputText for="somForn" value="Unidades de Fornecimento" id="optForn" />
+						<p:selectOneMenu value="#{pedidoMB.material.uf}" id="somForn">
+		
+							<f:selectItems value="#{pedidoMB.listaUf}" var="#{uf1}" id="sltUni"
+								itemLabel="#{uf1.descricao}"
+								itemValue="#{uf1}" />
+							<f:converter converterId="UfConverter" />
+		
+						</p:selectOneMenu>
+						
+						<h:outputText value="Quantidade" id="optQtd" />
+						<p:inputText value="#{pedidoMB.pedido.quantidade}" id="ipQtd" required="true"
+							requiredMessage="É preciso preencher os campos">
+							<f:convertNumber  maxFractionDigits="2" minIntegerDigits="1"  />
+						</p:inputText>
+						
+						<h:outputText value="Observação" id="optObs" />
+						<p:inputTextarea value="#{pedidoMB.pedido.observacoes}" id="iptObs"
+							required="true" rows="6" cols="60" minQueryLength="7"
+							requiredMessage="É preciso preencher os campos" />
+						
+						<h:outputText value="Aplicação" id="optAplic" />
+						<p:inputText value="#{pedidoMB.pedido.aplicacao}" id="aplica2"
+							required="true" />
+
+
+		                </h:panelGrid>	
+		                
+		            </p:panel>
+		            <p:panel header="Dados do item a ser pedido" id="pan2" rendered="#{pedidoMB.simboloMaterial != null}">
+		            
+		                <p:messages />
+		                <h:panelGrid columns="2">
+		                
+						<h:outputText value="Descrição" id="optDesc2" />
+						<p:inputTextarea value="#{pedidoMB.material.descricao}" id="iptDesc2"
+							required="true" rows="8" cols="60" minQueryLength="7" disabled="true"
+							requiredMessage="É preciso preencher os campos" />
+		
+						<h:outputText value="Preço por UF" id="optPreco2" />
+						<p:inputText value="#{pedidoMB.material.precoUf}" disabled="true" id="ipPreco2"
+							requiredMessage="É preciso preencher os campos">
+							<f:convertNumber  maxFractionDigits="2" minIntegerDigits="1"  />
+						</p:inputText>
+		
+						<h:outputText for="somForn2" value="Unidades de Fornecimento" id="optForn2"/>
+						<p:selectOneMenu value="#{pedidoMB.material.uf}" disabled="true" id="somForn2">
+		
+							<f:selectItems value="#{pedidoMB.listaUnidades}" var="#{uf}" id="siForn2"
+								itemLabel="#{uf.descricao}"
+								itemValue="#{uf}" />
+							<f:converter converterId="UfConverter" />
+		
+						</p:selectOneMenu>
+						
+						<h:outputText value="Quantidade" id="optQtd2" />
+						<p:inputText value="#{pedidoMB.pedido.quantidade}" id="ipQtd2" required="true"
+							requiredMessage="É preciso preencher os campos">
+							<f:convertNumber  maxFractionDigits="2" minIntegerDigits="1"  />
+						</p:inputText>
+						
+						<h:outputText value="Observação" id="optObs2" />
+						<p:inputTextarea value="#{pedidoMB.pedido.observacoes}" id="iptObs2"
+							required="true" rows="6" cols="60" minQueryLength="7"
+							requiredMessage="É preciso preencher os campos" />
+						
+						<h:outputText value="Aplicação" id="optAplic2" />
+						<p:inputText value="#{pedidoMB.pedido.aplicacao}" id="aplica"
+							required="true" />
+	                
+
+		                </h:panelGrid>	
+		            </p:panel>
+
+		        </p:tab>
+		        <p:tab id="ped3" title="3 - Confirme" >
+	        	
+		            <p:panel header="Dados do item a ser pedido" id="pan3">
+		            <h:inputHidden value="#{pedidoMB.material.codigo}" id="iphCodigo"></h:inputHidden>
+		            
+		            <h:panelGrid columns="2">
+		            		<h:outputText value="Símbolo" id="optSimb3" rendered="#{pedidoMB.material.simbolo !=null }" />
+		                    <p:inputText value="#{pedidoMB.material.simbolo}" label="Símbolo"  id="simboloMat3" disabled="true" rendered="#{pedidoMB.material.simbolo !=null }"/>
+
+						<h:outputText value="Descrição" id="optDesc3" />
+						<p:inputTextarea value="#{pedidoMB.material.descricao}" id="iptDesc3"
+							required="true" rows="8" cols="60" minQueryLength="7" disabled="true"
+							requiredMessage="É preciso preencher os campos" />
+		
+						<h:outputText value="Preço por UF" id="optPreco3" />
+						<p:inputText value="#{pedidoMB.material.precoUf}" disabled="true" id="ipPreco3"
+							requiredMessage="É preciso preencher os campos">
+							<f:convertNumber  maxFractionDigits="2" minIntegerDigits="1"  />
+						</p:inputText>
+ 
+						<h:outputText for="somForn3" value="Unidades de Fornecimento" id="optForn3"/>
+						<p:inputText value="#{pedidoMB.material.uf}" disabled="true" id="ipUf3"
+							requiredMessage="É preciso preencher os campos" />
+						
+						<h:outputText value="Quantidade" id="optQtd3" />
+						<p:inputText value="#{pedidoMB.pedido.quantidade}" id="ipQtd3" disabled="true" required="true"
+							requiredMessage="É preciso preencher os campos">
+							<f:convertNumber  maxFractionDigits="2" minIntegerDigits="1"  />
+						</p:inputText>
+						
+						<h:outputText value="Observação" id="optObs3" />
+						<p:inputTextarea value="#{pedidoMB.pedido.observacoes}" id="iptObs3"
+							required="true" rows="6" cols="60" minQueryLength="7" disabled="true"
+							requiredMessage="É preciso preencher os campos" />
+						
+						<h:outputText value="Aplicação" id="optAplic3" />
+						<p:inputText value="#{pedidoMB.pedido.aplicacao}" id="aplica3" disabled="true"
+							required="true" />
+						<p:commandButton value="Emitir Pedido" action="#{pedidoMB.emitirPedido}" ajax="true" update=":form1" />
+							
+		            </h:panelGrid>
+		            </p:panel>
+		        </p:tab>
+		        </p:wizard>
+		</h:form>
+	</p:panel>
+	<br/>
+	
+</h:body>
+</html>
