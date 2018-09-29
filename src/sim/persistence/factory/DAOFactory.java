@@ -5,6 +5,7 @@ import sim.persistence.EnderecoDAO;
 import sim.persistence.FornecedorDAO;
 import sim.persistence.HibernateUtil;
 import sim.persistence.MaterialDAO;
+import sim.persistence.PedidoDAO;
 import sim.persistence.PerfilDAO;
 import sim.persistence.UnidadeFornecimentoDAO;
 import sim.persistence.UsuarioDAO;
@@ -58,6 +59,13 @@ public class DAOFactory {
 		enderecoDAO.setSession(HibernateUtil.getSessionFactory().getCurrentSession());
 		
 		return enderecoDAO;
+	}
+	
+	public static PedidoDAO criarPedidoDAO()	{
+		PedidoDAO pedidoDAO = new PedidoDAO();
+		pedidoDAO.setSession(HibernateUtil.getSessionFactory().getCurrentSession());
+		
+		return pedidoDAO;
 	}
 
 }

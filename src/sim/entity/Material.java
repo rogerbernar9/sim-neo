@@ -25,7 +25,7 @@ public class Material implements Serializable {
 	@GeneratedValue(strategy=GenerationType.IDENTITY)
 	private Integer codigo;
 	
-	@Column(length=30, nullable=false, unique=true)
+	@Column(length=30, nullable=true, unique=true)
 	private String simbolo;
 	
 	@Column(length=255, nullable=false)

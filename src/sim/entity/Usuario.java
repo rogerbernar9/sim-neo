@@ -18,22 +18,7 @@ import sim.util.criptografia.Criptografia;
 public class Usuario implements Serializable {
 	
 	private static final long serialVersionUID = 1L;
-	
-	public Usuario(Integer codigo, String nome, String matricula, String senha, String cargo, String setor,
-			String email, Departamento depto, Perfil perfil) {
-		this.codigo = codigo;
-		this.nome = nome;
-		this.matricula = matricula;
-		this.senha = senha;
-		this.cargo = cargo;
-		this.setor = setor;
-		this.email = email;
-		this.depto = depto;
-		this.perfil = perfil;
-	}
 
-	public Usuario() {
-	}
 
 	@Id
 	@GeneratedValue(strategy=GenerationType.AUTO)
@@ -64,6 +49,23 @@ public class Usuario implements Serializable {
 	@ManyToOne
 	@JoinColumn(name="id_perfil")
 	private Perfil perfil;
+	
+	
+	public Usuario(Integer codigo, String nome, String matricula, String senha, String cargo, String setor,
+			String email, Departamento depto, Perfil perfil) {
+		this.codigo = codigo;
+		this.nome = nome;
+		this.matricula = matricula;
+		this.senha = senha;
+		this.cargo = cargo;
+		this.setor = setor;
+		this.email = email;
+		this.depto = depto;
+		this.perfil = perfil;
+	}
+
+	public Usuario() {
+	}
 
 	public Integer getCodigo() {
 		return codigo;

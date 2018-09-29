@@ -21,7 +21,7 @@
     <mapping class="sim.entity.Material"/>
     <mapping class="sim.entity.Fornecedor"/>
     <mapping class="sim.entity.Endereco"/>
-
+	<mapping class="sim.entity.Pedido"/>
 
  </session-factory>
 </hibernate-configuration>

@@ -33,6 +33,7 @@ public class MaterialMB {
 	public void gravar()	{
 		FacesContext fc = FacesContext.getCurrentInstance();
 		try {
+			this.material.setSimbolo(this.material.getSimbolo().toUpperCase());
 			this.materialDao.salvar(material);
 			this.material = new Material();
 			fc.addMessage(null, new FacesMessage("Dados gravados"));
@@ -44,6 +45,7 @@ public class MaterialMB {
 	public void editar()	{
 		FacesContext fc = FacesContext.getCurrentInstance();
 		try {
+			this.material.setSimbolo(this.material.getSimbolo().toUpperCase());
 			this.materialDao.atualizar(material);
 			this.material = new Material();
 			fc.addMessage(null, new FacesMessage("Dados modificados"));
