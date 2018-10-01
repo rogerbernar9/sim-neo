@@ -1,7 +1,8 @@
 package sim.entity;
 
 import java.io.Serializable;
-import java.sql.Date;
+import java.sql.Timestamp;
+import java.util.Date;
 
 import javax.persistence.Column;
 import javax.persistence.Entity;
@@ -11,6 +12,7 @@ import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
 import javax.persistence.Table;
+import javax.persistence.Transient;
 
 @Entity
 @Table(name="pedido")
@@ -29,10 +31,10 @@ public class Pedido implements Serializable {
 	private String status;
 	
 	@Column
-	private Date dataEmissao;
+	private Timestamp dataEmissao;
 	
 	@Column
-	private Date dataFim;
+	private Timestamp dataFim;
 	
 	@Column
 	private String aplicacao;
@@ -57,9 +59,25 @@ public class Pedido implements Serializable {
 	@JoinColumn(name="id_usuario")
 	private Usuario usuario;
 	
+	@Transient
+	public static final String STATUS_PRIMARIO = "Emitido";
+	@Transient
+	public static final String STATUS_REJEITADO = "Rejeitado";
+	@Transient
+	public static final String STATUS_AGUARDA_AUTORIZACAO = "Pendente";
+	@Transient
+	public static final String STATUS_ANALISE_ESTUDO_MATERIAL = "Em estudo de material";
+	@Transient
+	public static final String STATUS_COM_SALDO_ESTOQUE = "Aguardando retirada no estoque";
+	@Transient
+	public static final String STATUS_OBTENCAO = "Em obtenção";
+	@Transient
+	public static final String STATUS_FINAL_ENTREGA = "Aguardando entrega";
+	@Transient
+	public static final String STATUS_FINAL = "Entregue";
 	
-
-	public Pedido(Integer codigo, Float quantidade, String status, Date dataEmissao, Date dataFim, String aplicacao,
+	
+	public Pedido(Integer codigo, Float quantidade, String status, Timestamp dataEmissao, Timestamp dataFim, String aplicacao,
 			String andamento, boolean urgencia, String observacoes, boolean ressuprimento, Material material,
 			Usuario usuario) {
 		this.codigo = codigo;
@@ -100,7 +118,7 @@ public class Pedido implements Serializable {
 		return dataEmissao;
 	}
 
-	public void setDataEmissao(Date dataEmissao) {
+	public void setDataEmissao(Timestamp dataEmissao) {
 		this.dataEmissao = dataEmissao;
 	}
 
@@ -108,7 +126,7 @@ public class Pedido implements Serializable {
 		return dataFim;
 	}
 
-	public void setDataFim(Date dataFim) {
+	public void setDataFim(Timestamp dataFim) {
 		this.dataFim = dataFim;
 	}
 

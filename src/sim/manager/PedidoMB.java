@@ -1,5 +1,7 @@
 package sim.manager;
 
+import java.sql.Timestamp;
+import java.util.Date;
 import java.util.List;
 
 import javax.faces.application.FacesMessage;
@@ -48,13 +50,14 @@ public class PedidoMB {
 	
     public String processaPedido(FlowEvent event) throws Exception {
 		inicializaObjetosDoPedido();
-    	System.out.println(event.getOldStep());
-    	System.out.println(event.getNewStep());
     	
+		//voltando a tela anterior
     	if(event.getOldStep().equals("ped2") &&
     	   event.getNewStep().equals("ped1"))	{
     		limpaObjetos();
     	}
+    	
+    	//voltado da terceira tela
     	if(event.getOldStep().equals("ped3") &&
     			event.getNewStep().equals("ped2"))	{
     		limpaObjetos();
@@ -69,7 +72,7 @@ public class PedidoMB {
         		limpaObjetos();
         		return event.getNewStep();
         	}
-        	else	{
+        	else	{ 	//processa pedido com símbolo informado
 	        		try {
 	            		this.material = materialDao.buscarMaterialPorSimbolo(simboloMaterial);
 	            		if(this.material == null)	{
@@ -108,7 +111,9 @@ public class PedidoMB {
     public String emitirPedido()	{
 		inicializaObjetosDoPedido();
     	FacesContext fc = FacesContext.getCurrentInstance();
-
+    	this.pedido.setStatus(Pedido.STATUS_PRIMARIO);
+    	this.pedido.setDataEmissao(new Timestamp(new java.util.Date().getTime()));
+    	
     	try	{
     		if(this.simboloMaterial ==null)
     			this.materialDao.salvar(material);
