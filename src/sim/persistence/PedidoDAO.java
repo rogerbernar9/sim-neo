@@ -62,7 +62,7 @@ public class PedidoDAO implements IPedidoDAO {
 
 	@Override
 	public List<Pedido> listarPorSetorPendentes(Usuario u) {
-		String hsql = "select p from Pedido p inner join p.usuario as u where u.setor = :setor and u.status = 'Pendente' ";
+		String hsql = "select p from Pedido p inner join p.usuario as up where up.setor = :setor and p.status in ('Emitido')";
 		
 		Query q = this.session.createQuery(hsql);
 		q.setString("setor", u.getSetor());

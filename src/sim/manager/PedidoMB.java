@@ -1,18 +1,13 @@
 package sim.manager;
 
 import java.sql.Timestamp;
-import java.util.Date;
 import java.util.List;
-
 import javax.faces.application.FacesMessage;
-import javax.faces.bean.ApplicationScoped;
 import javax.faces.bean.ManagedBean;
-import javax.faces.bean.RequestScoped;
-import javax.faces.bean.SessionScoped;
+import javax.faces.bean.ManagedProperty;
 import javax.faces.bean.ViewScoped;
 import javax.faces.context.FacesContext;
 
-import org.primefaces.component.inputtext.InputText;
 import org.primefaces.event.FlowEvent;
 
 import sim.entity.Material;
@@ -39,6 +34,8 @@ public class PedidoMB {
 	private boolean pulo;
 	private boolean urgencia;
 	
+	@ManagedProperty("#{loginMB}")
+	private LoginMB loginMB;
 	
 	
 	public PedidoMB() {
@@ -111,12 +108,15 @@ public class PedidoMB {
     public String emitirPedido()	{
 		inicializaObjetosDoPedido();
     	FacesContext fc = FacesContext.getCurrentInstance();
-    	this.pedido.setStatus(Pedido.STATUS_PRIMARIO);
+    	this.pedido.setUsuario(this.loginMB.getUsuario());
+		this.pedido.setStatus(Pedido.STATUS_PRIMARIO);
     	this.pedido.setDataEmissao(new Timestamp(new java.util.Date().getTime()));
     	
-    	try	{
-    		if(this.simboloMaterial ==null)
+    	try	{	//setar id material no pedido quando emitido sem simbolo
+    		if(this.simboloMaterial ==null)	{
     			this.materialDao.salvar(material);
+    			this.pedido.setMaterial(this.material);
+    		}
     		else	{
     			this.pedido.setMaterial(this.material);
     		}
@@ -221,6 +221,16 @@ public class PedidoMB {
 
 	public void setListaUf(List<UnidadeFornecimento> listaUf) {
 		this.listaUf = listaUf;
+	}
+
+
+	public LoginMB getLoginMB() {
+		return loginMB;
+	}
+
+
+	public void setLoginMB(LoginMB loginMB) {
+		this.loginMB = loginMB;
 	}
 
 }

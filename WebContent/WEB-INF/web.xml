@@ -1,16 +1,38 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<web-app xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns="http://xmlns.jcp.org/xml/ns/javaee" xsi:schemaLocation="http://xmlns.jcp.org/xml/ns/javaee http://xmlns.jcp.org/xml/ns/javaee/web-app_3_1.xsd" id="WebApp_ID" version="3.1">
+<web-app xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns="http://xmlns.jcp.org/xml/ns/javaee" 
+		 xsi:schemaLocation="http://xmlns.jcp.org/xml/ns/javaee http://xmlns.jcp.org/xml/ns/javaee/web-app_3_1.xsd" 
+		 id="WebApp_ID" version="3.1">
+		 
   <display-name>SIM-NEO</display-name>
   <!-- Mapeamento Filtros -->
+
+  <filter>
+    <filter-name>redirPage</filter-name>
+    <filter-class>sim.web.filter.RedirecionaPagina</filter-class>
+  </filter>
+  <filter>
+    <filter-name>loginFilter</filter-name>
+    <filter-class>sim.web.filter.FiltroLogin</filter-class>
+  </filter>
   <filter>
     <filter-name>conexaoFilter</filter-name>
     <filter-class>sim.web.filter.FiltroConexao</filter-class>
   </filter>
-    <filter-mapping>
+
+  
+  <filter-mapping>
     <filter-name>conexaoFilter</filter-name>
     <url-pattern>*.xhtml</url-pattern>
   </filter-mapping>
-  
+  <filter-mapping>
+    <filter-name>redirPage</filter-name>
+    <url-pattern>/faces/public/*</url-pattern>
+  </filter-mapping>
+  <filter-mapping>
+    <filter-name>loginFilter</filter-name>
+    <url-pattern>/faces/restrict/*</url-pattern>
+  </filter-mapping>
+
 
   <!-- Mapeamento Servlets -->
   <servlet>

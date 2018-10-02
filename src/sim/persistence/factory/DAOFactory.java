@@ -11,6 +11,7 @@ import sim.persistence.PedidoDAO;
 import sim.persistence.PerfilDAO;
 import sim.persistence.UnidadeFornecimentoDAO;
 import sim.persistence.UsuarioDAO;
+import sim.persistence.ItemMovimentoDAO;
 
 public class DAOFactory {
 	
@@ -75,6 +76,13 @@ public class DAOFactory {
 		itemEstoqueDAO.setSession(HibernateUtil.getSessionFactory().getCurrentSession());
 		
 		return itemEstoqueDAO;
+	}
+	
+	public static ItemMovimentoDAO criarItemMovimentoDAO()	{
+		ItemMovimentoDAO itemMovimentoDAO = new ItemMovimentoDAO();
+		itemMovimentoDAO.setSession(HibernateUtil.getSessionFactory().getCurrentSession());
+		
+		return itemMovimentoDAO;
 	}
 	
 	public static OrdemCompraDAO criarOrdemCompraDAO ()	{

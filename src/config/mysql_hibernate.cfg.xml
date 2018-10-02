@@ -23,6 +23,7 @@
     <mapping class="sim.entity.Endereco"/>
 	<mapping class="sim.entity.Pedido"/>
 	<mapping class="sim.entity.ItemEstoque"/>
+	<mapping class="sim.entity.ItemMovimento"/>
 	<mapping class="sim.entity.OrdemCompra"/>
 
  </session-factory>

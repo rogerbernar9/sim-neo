@@ -11,13 +11,17 @@
 <h:head>
 </h:head>
 <h:body>
+<ui:insert name="menu">
+	<ui:include src="menu.xhtml" />
+</ui:insert>
+<br/>
+<br/>
 	<p:panel header="Emissão de requisição de material">
 		<h:form id="form1">
 		    <p:wizard flowListener="#{pedidoMB.processaPedido}">
 		        <p:tab id="ped1" title="1 - Entre com o símbolo">
 		            <p:panel header="Material a ser pedido">
 						<p:growl></p:growl>
-						<p:messages></p:messages>
 						<h:panelGrid columns="2">
 		                    <h:outputText value="Símbolo do ítem: " />
 							<p:inputMask value="#{pedidoMB.simboloMaterial}" required="true"
