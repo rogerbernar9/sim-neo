@@ -25,7 +25,7 @@ public class ItemEstoqueDAO implements IItemEstoqueDAO {
 
 	@Override
 	public void excluir(ItemEstoque iestoque) {
-		this.session.update(iestoque);
+		this.session.delete(iestoque);
 	}
 
 	@Override

@@ -1,0 +1,103 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" 
+    "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+
+<html xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:p="http://primefaces.org/ui"
+	xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:f="http://java.sun.com/jsf/core"
+	xmlns:ui="http://java.sun.com/jsf/facelets">
+
+
+<h:head>
+</h:head>
+<h:body>
+	<ui:insert name="menu">
+		<ui:include src="menu.xhtml" />
+	</ui:insert>
+	<br />
+	<br />
+	<h:form id="form1">
+	<p:panel id="panel1" header="Entrada de item no estoque">
+	
+		<p:wizard flowListener="#{movimentoMB.processaMovimento}">
+			<p:tab id="ent1" title="1 - Entre com o pedido">
+				<p:growl></p:growl>
+				<p:panelGrid columns="2">
+					<h:outputText value="Número da requisição de material:"></h:outputText>
+					<p:inputText value="#{movimentoMB.codigoPedido}" required="true" 
+						requiredMessage="É preciso preencher os campos" >
+						<f:convertNumber  minFractionDigits="0" minIntegerDigits="1"  />
+						</p:inputText>
+
+				</p:panelGrid>
+			</p:tab>
+			<p:tab id="ent2" title="2 - Selecione o item de estoque">
+				<p:panel id="panel2" rendered="#{movimentoMB.pedido != null}">
+					<p:growl></p:growl>
+
+					<p:panelGrid columns="2">
+						<h:outputText value="Requisição de material:"></h:outputText>
+						<p:inputText value="#{movimentoMB.pedido.codigo}" required="true"
+							requiredMessage="É preciso preencher os campos" />
+
+						<h:outputText value="Material:"></h:outputText>
+						<p:inputText value="#{movimentoMB.pedido.material.simbolo}"
+							readonly="true" requiredMessage="É preciso preencher os campos" />
+
+						<h:outputText value="Descrição do item:"></h:outputText>
+						<p:inputTextarea value="#{movimentoMB.pedido.material.descricao}"
+							readonly="true" rows="8" cols="60" minQueryLength="7"
+							requiredMessage="É preciso preencher os campos" />
+
+						<h:outputText value="Quantidade do pedido:"></h:outputText>
+						<p:inputText value="#{movimentoMB.pedido.quantidade}"
+							readonly="true" requiredMessage="É preciso preencher os campos" />
+
+						<h:outputText value="Data emissão:"></h:outputText>
+						<p:inputText value="#{movimentoMB.pedido.dataEmissao}"
+							readonly="true" requiredMessage="É preciso preencher os campos" />
+
+						<h:outputText value="Obs:"></h:outputText>
+						<p:inputText value="#{movimentoMB.pedido.observacoes}"
+							readonly="true" requiredMessage="É preciso preencher os campos" />
+
+						<h:outputText value="Status:"></h:outputText>
+						<p:inputText value="#{movimentoMB.pedido.status}" readonly="true"
+							requiredMessage="É preciso preencher os campos" />
+							
+						<h:outputText value="Operação:"></h:outputText>
+				        <p:selectOneMenu id="saida" value="#{movimentoMB.operacao}" style="width:125px" required="true">
+				        	<f:selectItem itemLabel="Selecione" itemValue="" />
+				            <f:selectItem itemLabel="Entrada de saldo estoque" itemValue="entrada" />
+				            <f:selectItem itemLabel="Saída de item no estoque" itemValue="saida" />
+				        </p:selectOneMenu>
+					</p:panelGrid>
+					<br />
+
+					<p:dataTable value="#{movimentoMB.listaItemEstoque}" var="linha"
+						rowKey="#{linha.codigo}" paginator="false" 
+						selection="#{movimentoMB.estoque}">
+						<p:column selectionMode="single" 
+							style="width:16px;text-align:center" />
+						<p:column headerText="Localização">
+							<h:outputText value="#{linha.localizacao}" />
+						</p:column>
+						<p:column headerText="Prateleira">
+							<h:outputText value="#{linha.prateleira}" />
+						</p:column>
+						<p:column headerText="Saldo">
+							<h:outputText value="#{linha.saldo}" />
+						</p:column>
+					</p:dataTable>
+					<br/>
+					<p:commandButton value="Confirmar"
+						action="#{movimentoMB.confirmar}" ajax="true"
+						update=":form1" />
+				</p:panel>
+				</p:tab>
+		
+	</p:wizard>
+	</p:panel>
+</h:form>
+</h:body>
+</html>

@@ -72,10 +72,9 @@ public class Pedido implements Serializable {
 	@Transient
 	public static final String STATUS_OBTENCAO = "Em obtenção";
 	@Transient
-	public static final String STATUS_FINAL_ENTREGA = "Aguardando entrega";
+	public static final String STATUS_AGUARDA_ENTREGA = "Aguardando entrega";
 	@Transient
-	public static final String STATUS_FINAL = "Entregue";
-	
+	public static final String STATUS_FINAL = "Atendido";
 	
 	public Pedido(Integer codigo, Float quantidade, String status, Timestamp dataEmissao, Timestamp dataFim, String aplicacao,
 			String andamento, boolean urgencia, String observacoes, boolean ressuprimento, Material material,

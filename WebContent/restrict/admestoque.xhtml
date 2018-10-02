@@ -1,0 +1,118 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" 
+    "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+
+<html xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:p="http://primefaces.org/ui"
+	xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:f="http://java.sun.com/jsf/core"
+	xmlns:ui="http://java.sun.com/jsf/facelets">
+
+<h:head>
+</h:head>
+<h:body>
+<ui:insert name="menu">
+	<ui:include src="menu.xhtml" />
+</ui:insert>
+<br/>
+<br/>
+	<p:panel header="Administração de estoque">
+		<h:form id="form1">
+			<p:growl></p:growl>
+			<p:dataTable value="#{estoqueMB.listaEstoque}" var="linha"
+				paginator="false">
+				<p:column headerText="Símbolo">
+					<h:outputText value="#{linha.material.simbolo}" />
+				</p:column>
+				<p:column headerText="Saldo">
+					<h:outputText value="#{linha.saldo}" />
+				</p:column>
+				<p:column headerText="Localização">
+					<h:outputText value="#{linha.localizacao}" />
+				</p:column>
+				<p:column headerText="Prateleira">
+					<h:outputText value="#{linha.prateleira}" />
+				</p:column>
+				<p:column headerText="Ações">
+				<h:commandLink onclick="PF('inclusao').show()" ajax="true" update=":form4">
+					<f:ajax execute="@this" render=":form4" />
+					<h:graphicImage library="imagens" name="incluir16.png" title="Incluir" />
+				</h:commandLink>
+				<h:commandLink onclick="PF('alteracao').show()" ajax="true" update=":form3">
+					<f:ajax execute="@this" render=":form3" />
+					<h:graphicImage library="imagens" name="editar16.png" />
+					<f:setPropertyActionListener target="#{estoqueMB.estoque}"
+						value="#{linha}" />
+				</h:commandLink>
+				<h:commandLink action="#{estoqueMB.excluir}" onclick="if(confirm('Deseja realmente excluir este item ?'))return true;return false">
+					<f:ajax execute="@this" render=":form1" />
+					<h:graphicImage library="imagens" name="excluir16.png" />
+					<f:setPropertyActionListener target="#{estoqueMB.estoque}" value="#{linha}" />
+				</h:commandLink>
+					
+				</p:column>
+			</p:dataTable>
+		</h:form>
+	</p:panel>
+	<p:dialog header="Alterar os dados" widgetVar="alteracao" modal="true">
+		<h:form id="form3">
+		<p:growl></p:growl>
+				<h:inputHidden value="#{estoqueMB.estoque.codigo}"></h:inputHidden>
+				<h:inputHidden value="#{estoqueMB.estoque.material.codigo}"></h:inputHidden>
+				<h:inputHidden value="#{estoqueMB.estoque.material.simbolo}"></h:inputHidden>
+			<p:panelGrid columns="2">
+				<h:outputText for="Símbolo" value="Símbolo:" />
+				<p:inputText value="#{estoqueMB.estoque.material.simbolo}" required="true" disabled="true"
+					requiredMessage="É preciso preencher os campos" />
+				
+				<h:outputText for="Saldo" value="Saldo:" />
+				<p:inputText value="#{estoqueMB.estoque.saldo}" required="true"
+					requiredMessage="É preciso preencher os campos" />
+
+				<h:outputText for="Localizacao" value="Localização:" />
+				<p:inputText value="#{estoqueMB.estoque.localizacao}" required="true"
+					requiredMessage="É preciso preencher os campos" />
+
+				<h:outputText for="Prateleira" value="Prateleira:" />
+				<p:inputText value="#{estoqueMB.estoque.prateleira}"
+					required="true" requiredMessage="É preciso preencher os campos" />
+
+
+				<p:commandButton value="Alterar" action="#{estoqueMB.editar}" ajax="true" onclick="PF('alteracao').hide()"
+					update=":form1,:form3">
+				</p:commandButton>
+				</p:panelGrid>
+		</h:form>
+	</p:dialog>
+	<p:dialog header="Inclusão de item no estoque" widgetVar="inclusao" modal="true">
+		<h:form id="form4">
+		<p:growl></p:growl>
+
+			<p:panelGrid columns="2">
+				<h:outputText for="Símbolo" value="Símbolo:" />
+				<p:inputMask value="#{estoqueMB.estoque.material.simbolo}"
+					mask="99-a-9999-999" style="text-transform: uppercase"
+					requiredMessage="É preciso preencher os campos" />
+
+				<h:outputText for="Saldo" value="Saldo:" />
+				<p:inputText value="#{estoqueMB.estoque.saldo}" required="true"
+					requiredMessage="É preciso preencher os campos" />
+
+				<h:outputText for="Localizacao" value="Localização:" />
+				<p:inputText value="#{estoqueMB.estoque.localizacao}" required="true"
+					requiredMessage="É preciso preencher os campos" />
+
+				<h:outputText for="Prateleira" value="Prateleira:" />
+				<p:inputText value="#{estoqueMB.estoque.prateleira}"
+					required="true" requiredMessage="É preciso preencher os campos" />
+
+
+				<p:commandButton value="Salvar" action="#{estoqueMB.gravar}" ajax="true" onclick="PF('inclusao').hide()"
+					update=":form1,:form3">
+				</p:commandButton>
+				</p:panelGrid>
+		</h:form>
+	</p:dialog>
+
+	
+</h:body>
+</html>

@@ -43,6 +43,8 @@ public class ItemEstoque {
 	}
 
 	public ItemEstoque() {
+		if(this.material == null)
+			this.material = new Material();
 	}
 
 	public Integer getCodigo() {

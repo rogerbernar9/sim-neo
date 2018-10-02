@@ -31,7 +31,7 @@ public class ItemMovimento {
 	private String operacao;
 	
 	@Column
-	private Double quantidade;
+	private Float quantidade;
 	
 	@ManyToOne
 	@JoinColumn(name="id_item_estoque")
@@ -42,7 +42,7 @@ public class ItemMovimento {
 	@JoinColumn(name="id_pedido")
 	private Pedido pedido;
 	
-	public ItemMovimento(Integer codigo, Timestamp dataMovimento, String operacao, Double quantidade,
+	public ItemMovimento(Integer codigo, Timestamp dataMovimento, String operacao, Float quantidade,
 			ItemEstoque itemEstoque, Pedido pedido) {
 		this.codigo = codigo;
 		this.dataMovimento = dataMovimento;
@@ -74,10 +74,10 @@ public class ItemMovimento {
 	public void setOperacao(String operacao) {
 		this.operacao = operacao;
 	}
-	public Double getQuantidade() {
+	public Float getQuantidade() {
 		return quantidade;
 	}
-	public void setQuantidade(Double quantidade) {
+	public void setQuantidade(Float quantidade) {
 		this.quantidade = quantidade;
 	}
 	public ItemEstoque getItemEstoque() {
