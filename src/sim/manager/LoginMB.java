@@ -9,6 +9,7 @@ import javax.faces.context.FacesContext;
 import sim.entity.Usuario;
 import sim.persistence.UsuarioDAO;
 import sim.persistence.factory.DAOFactory;
+import sim.util.criptografia.Criptografia;
 
 @ManagedBean(name="loginMB")
 @SessionScoped
@@ -29,7 +30,7 @@ public class LoginMB {
 		this.usuarioDao = DAOFactory.criarUsuarioDAO();
 		FacesContext fc = FacesContext.getCurrentInstance();
 		this.usuario = this.usuarioDao
-							.buscarPorLogin(nomeUsuario, senhaUsuario);
+							.buscarPorLogin(nomeUsuario, Criptografia.criptografia(senhaUsuario));
 		
 		if(usuario != null)	{
 			fc.addMessage(null, new FacesMessage("Usuário logado com sucesso"));
