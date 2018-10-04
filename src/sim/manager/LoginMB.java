@@ -30,14 +30,14 @@ public class LoginMB {
 		this.usuarioDao = DAOFactory.criarUsuarioDAO();
 		FacesContext fc = FacesContext.getCurrentInstance();
 		this.usuario = this.usuarioDao
-							.buscarPorLogin(nomeUsuario, Criptografia.criptografia(senhaUsuario));
-		
+				.buscarPorLogin(nomeUsuario, Criptografia.criptografia(senhaUsuario));
+
 		if(usuario != null)	{
-			fc.addMessage(null, new FacesMessage("Usuário logado com sucesso"));
-			this.logado = true;
+				fc.addMessage(null, new FacesMessage("Usuário logado com sucesso"));
+				this.logado = true;
 			return "/faces/restrict/pedido.xhtml";
 		}	else	{
-			fc.addMessage(null, new FacesMessage(FacesMessage.SEVERITY_ERROR,"Usuário não encontrado!",""));  
+				fc.addMessage(null, new FacesMessage(FacesMessage.SEVERITY_ERROR,"Usuário não encontrado!",""));  
 			return "";
 
 		}

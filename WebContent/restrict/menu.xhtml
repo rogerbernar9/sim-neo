@@ -17,20 +17,25 @@
 	        <p:submenu label="Requisição de materiai">
 	            <p:menuitem value="Nova requisição" url="/faces/restrict/pedido.xhtml" />
 	            <p:menuitem value="Autoriza/Cancela requisição" url="/faces/restrict/autorizarpedidos.xhtml" />
-	            <p:menuitem value="Consultar requisições emitidas" url="#" />
-	            <p:menuitem value="Pesquisar requisição de material" url="#" />
+	            <p:menuitem value="Consultar requisições emitidas" url="/faces/restrict/consultapedidos.xhtml" />
 	        </p:submenu>
 	 
 	        <p:submenu label="Catálogo de materiais">
 	            <p:submenu label="Unidade de fornecimento">
                 	<p:menuitem value="Consultar" url="/faces/restrict/admunidadeforn.xhtml" />
             	</p:submenu>
-	            <p:menuitem value="Administrar" url="/faces/restrict/consultacatalogo.xhtml" />
+            	<p:submenu label="Administrar">
+            		<p:menuitem value="Editar catálogo" url="/faces/restrict/admmaterial.xhtml" />
+	            	<p:menuitem value="Pedidos s/simb." url="/faces/restrict/autorizacomsimbolo.xhtml" />
+            	</p:submenu>
+            		<p:menuitem value="Consultar catálogo" url="/faces/restrict/consultacatalogo.xhtml" />
+            	
+	            
 	        </p:submenu>
 
 	        <p:submenu label="Ordem de compra">
-	        	<p:menuitem value="Emitir" url="/faces/restrict/" />
-	            <p:menuitem value="Consulta" url="/faces/restrict/" />
+	        	<p:menuitem value="Emitir" url="/faces/restrict/ordemcompra.xhtml" />
+	            <p:menuitem value="Consulta" url="/faces/restrict/consultaordem.xhtml" />
 	        </p:submenu>
 
 	        <p:submenu label="Usuários">
@@ -44,6 +49,9 @@
 
 	        <p:submenu label="Fornecedores">
 	        	<p:menuitem value="Administrar" url="/faces/restrict/admfornecedor.xhtml" />
+	        </p:submenu>
+	        <p:submenu label="Balcão">
+	        	<p:menuitem value="Recebimento" url="/faces/restrict/recebimento.xhtml" />
 	        </p:submenu>
 	 
 	        <f:facet name="options">

@@ -35,6 +35,10 @@ public class OrdemCompra {
 	@JoinColumn(name="id_fornecedor")
 	private Fornecedor fornecedor;
 	
+	@ManyToOne
+	@JoinColumn(name="id_usuario")
+	private Usuario usuario;
+	
 	public OrdemCompra() {
 	}
 	
@@ -92,10 +96,13 @@ public class OrdemCompra {
 	}
 
 
-	@Override
-	public String toString() {
-		return "OrdemCompra [codigo=" + codigo + ", dataEmissao=" + dataEmissao + ", preco=" + preco + ", pedido="
-				+ pedido + ", fornecedor=" + fornecedor + "]";
+	public Usuario getUsuario() {
+		return usuario;
+	}
+
+
+	public void setUsuario(Usuario usuario) {
+		this.usuario = usuario;
 	}
 
 

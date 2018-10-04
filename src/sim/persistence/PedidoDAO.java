@@ -71,7 +71,23 @@ public class PedidoDAO implements IPedidoDAO {
 
 	@Override
 	public List<Pedido> listarPedidoEmEstudo() {
-		String hsql = "select p from Pedido p where p.status = 'Em estudo'";
+		String hsql = "select p from Pedido p where p.status = 'Em estudo de material'";
+		Query q = this.session.createQuery(hsql);
+		
+		return q.list();
+	}
+	
+	@Override
+	public List<Pedido> listarPedidoEmObtencao() {
+		String hsql = "select p from Pedido p where p.status = 'Em obtenção'";
+		Query q = this.session.createQuery(hsql);
+		
+		return q.list();
+	}
+	
+	@Override
+	public List<Pedido> listarPedidoEmEntrega() {
+		String hsql = "select p from Pedido p where p.status = 'Aguardando entrega'";
 		Query q = this.session.createQuery(hsql);
 		
 		return q.list();

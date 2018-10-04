@@ -23,5 +23,9 @@ public interface IPedidoDAO {
 	public List<Pedido> listarPorSetorPendentes(Usuario u);
 	
 	public List<Pedido> listarPedidoEmEstudo();
+	
+	public List<Pedido> listarPedidoEmObtencao();
+	
+	public List<Pedido> listarPedidoEmEntrega();
 
 }

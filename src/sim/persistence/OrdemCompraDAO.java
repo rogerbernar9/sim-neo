@@ -41,6 +41,14 @@ public class OrdemCompraDAO implements IOrdemCompraDAO {
 		Query q = this.session.createQuery(hsql);
 		return (OrdemCompra) q.uniqueResult();
 	}
+	
+	@Override
+	public List<OrdemCompra> listarPorSetor(String setor) {
+		String hsql = "select oc from OrdemCompra oc inner join oc.usuario as u where u.setor = :setor";
+		Query q = this.session.createQuery(hsql);
+		q.setString("setor", setor);
+		return q.list();
+	}
 
 	@Override
 	public List<OrdemCompra> listar() {

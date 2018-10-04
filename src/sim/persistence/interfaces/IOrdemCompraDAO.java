@@ -17,5 +17,7 @@ public interface IOrdemCompraDAO {
 	public OrdemCompra carregarPorNumPedido(Integer numPedido);
 	
 	public List<OrdemCompra> listar();
+	
+	public List<OrdemCompra> listarPorSetor(String setor);
 
 }

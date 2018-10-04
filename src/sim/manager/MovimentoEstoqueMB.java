@@ -114,9 +114,9 @@ public class MovimentoEstoqueMB {
 		movimento.setPedido(pedido);
 		movimento.setQuantidade(pedido.getQuantidade());
 		movimento.setItemEstoque(this.estoque);
-		pedido.setStatus(Pedido.STATUS_FINAL);
-		atualizaSaldo(movimento, estoque, pedido);
 		try {
+			atualizaSaldo(movimento, estoque, pedido);
+			pedido.setStatus(Pedido.STATUS_FINAL);
 			pedidoDao.atualizar(pedido);
 			movimentoDao.salvar(movimento);
 			estoqueDao.atualizar(this.estoque);
@@ -129,7 +129,7 @@ public class MovimentoEstoqueMB {
 			return "entradaestoque";
 	}
 	
-	public void atualizaSaldo(ItemMovimento itemMovimento, ItemEstoque itemEstoque, Pedido pedido)		{
+	public void atualizaSaldo(ItemMovimento itemMovimento, ItemEstoque itemEstoque, Pedido pedido)	throws Exception	{
 		FacesContext fc = FacesContext.getCurrentInstance();
 		
 		if(itemMovimento.getOperacao().equals("entrada"))	{
@@ -137,8 +137,10 @@ public class MovimentoEstoqueMB {
 			fc.addMessage(null, new FacesMessage("Saldo atualizado."));
 		}
 		if(itemMovimento.getOperacao().equals("saida"))	{
-			if(itemEstoque.getSaldo()<pedido.getQuantidade())
+			if(itemEstoque.getSaldo()<pedido.getQuantidade())	{
 				fc.addMessage(null, new FacesMessage(FacesMessage.SEVERITY_ERROR,"Estoque insuficiente para atender o pedido.","")); 
+				throw new Exception();
+			}
 			else	{
 				itemEstoque.setSaldo(itemEstoque.getSaldo()-pedido.getQuantidade());
 				fc.addMessage(null, new FacesMessage("Saldo atualizado."));

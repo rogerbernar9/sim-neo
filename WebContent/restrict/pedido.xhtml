@@ -97,7 +97,7 @@
 						<h:outputText value="Preço por UF" id="optPreco2" />
 						<p:inputText value="#{pedidoMB.material.precoUf}" disabled="true" id="ipPreco2"
 							requiredMessage="É preciso preencher os campos">
-							<f:convertNumber  maxFractionDigits="2" minIntegerDigits="1"  />
+							<f:convertNumber type="currency" maxFractionDigits="2" minIntegerDigits="1"  />
 						</p:inputText>
 		
 						<h:outputText for="somForn2" value="Unidades de Fornecimento" id="optForn2"/>

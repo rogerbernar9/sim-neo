@@ -30,6 +30,7 @@ public class PedidoMB {
 	
 	private List<UnidadeFornecimento> listaUnidades;
 	private List<UnidadeFornecimento> listaUf;
+	private List<Pedido> pedidosPorSetor;
 	private String simboloMaterial;
 	private boolean pulo;
 	private boolean urgencia;
@@ -231,6 +232,17 @@ public class PedidoMB {
 
 	public void setLoginMB(LoginMB loginMB) {
 		this.loginMB = loginMB;
+	}
+
+
+	public List<Pedido> getPedidosPorSetor() {
+		this.pedidosPorSetor = pedidoDao.listarPorSetor(loginMB.getUsuario());
+		return pedidosPorSetor;
+	}
+
+
+	public void setPedidosPorSetor(List<Pedido> pedidosPorSetor) {
+		this.pedidosPorSetor = pedidosPorSetor;
 	}
 
 }
