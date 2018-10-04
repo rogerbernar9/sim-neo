@@ -1,0 +1,49 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" 
+    "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+
+<html xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:p="http://primefaces.org/ui"
+	xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:f="http://java.sun.com/jsf/core"
+	xmlns:ui="http://java.sun.com/jsf/facelets">
+
+
+<h:head>
+</h:head>
+<h:body>
+<ui:insert name="menu">
+	<ui:include src="menu.xhtml" />
+</ui:insert>
+<br/>
+<br/>
+	<p:panel header="Consulta às Ordens de Compra emitidas">
+		<h:form id="form1">
+			<p:growl></p:growl>
+			<p:dataTable value="#{ordemCompraMB.listaOrdemCompra}" var="linha"
+				paginator="false">
+				<p:column headerText="ID">
+					<h:outputText value="#{linha.codigo}" />
+				</p:column>
+				<p:column headerText="Data emissão">
+					<h:outputText value="#{linha.dataEmissao}" />
+				</p:column>
+				<p:column headerText="Preço">
+					<h:outputText value="#{linha.preco}" />
+				</p:column>
+				<p:column headerText="Fornecedor">
+					<h:outputText value="#{linha.fornecedor.nomeFantasia}" />
+				</p:column>
+				<p:column headerText="Nº Pedido">
+					<h:outputText value="#{linha.pedido.codigo}" />
+				</p:column>
+				<p:column headerText="Usuário">
+					<h:outputText value="#{linha.usuario.nome}" />
+				</p:column>
+				
+
+			</p:dataTable>
+		</h:form>
+	</p:panel>
+
+</h:body>
+</html>

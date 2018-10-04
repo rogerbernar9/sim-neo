@@ -1,0 +1,49 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" 
+    "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+
+<html xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:p="http://primefaces.org/ui"
+	xmlns:ui="http://java.sun.com/jsf/facelets"
+	xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:f="http://java.sun.com/jsf/core">
+
+<h:head>
+</h:head>
+<h:body>
+<ui:insert name="menu">
+	<ui:include src="menu.xhtml" />
+</ui:insert>
+	<br />
+	<br />
+	<h:form id="form1">
+		<p:panel id="pan1" header="Emissão de ordem de compra">
+		
+					<p:growl></p:growl>
+			<p:panelGrid id="png1" columns="2">
+				<h:outputText value="Número da requisição de material:" />
+				<p:inputText id="ipt1" value="#{ordemCompraMB.numPedido}"/>
+				
+				<h:outputText for="somForn" value="Fornecedor" id="optForn"/>
+						<p:selectOneMenu value="#{ordemCompraMB.fornecedor}" id="somForn2" >
+		
+							<f:selectItems value="#{ordemCompraMB.fornecedoresTela}" var="#{fornecedor}" id="siForn"
+								itemValue="#{fornecedor}" />
+							<f:converter converterId="FornecedorConverter" />
+		
+						</p:selectOneMenu>
+
+				<h:outputLabel value="Preço:" for="preco" />
+				<p:inputText id="preco" value="#{ordemCompraMB.preco}">
+					<f:convertNumber  maxFractionDigits="2" minIntegerDigits="1"  />
+				</p:inputText>
+
+				<p:commandButton action="#{ordemCompraMB.enviar}" value="Enviar" id="submeter" ajax="true"  update=":form1" />
+			
+			</p:panelGrid>
+			<p:messages />
+		</p:panel>
+	</h:form>
+	
+</h:body>
+
+</html>

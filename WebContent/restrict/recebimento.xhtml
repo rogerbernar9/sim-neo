@@ -1,0 +1,53 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" 
+    "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+
+<html xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:p="http://primefaces.org/ui"
+	xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:f="http://java.sun.com/jsf/core"
+	xmlns:ui="http://java.sun.com/jsf/facelets">
+
+
+<h:head>
+</h:head>
+<h:body>
+<ui:insert name="menu">
+	<ui:include src="menu.xhtml" />
+</ui:insert>
+<br/>
+<br/>
+	<p:panel header="Setor de recebimento de materiais">
+		<h:form id="form1">
+			<p:growl></p:growl>
+			<p:dataTable value="#{entregaMB.pedidosEntrega}" var="linha"
+				paginator="false">
+				<p:column headerText="Nº pedido">
+					<h:outputText value="#{linha.codigo}" />
+				</p:column>
+				<p:column headerText="Data emissão">
+					<h:outputText value="#{linha.dataEmissao}" />
+				</p:column>
+				<p:column headerText="Emissor">
+					<h:outputText value="#{linha.usuario.nome} - #{linha.usuario.setor}" />
+				</p:column>
+				<p:column headerText="Símbolo">
+					<h:outputText value="#{linha.material.simbolo}" />
+				</p:column>
+				<p:column headerText="Qtd">
+					<h:outputText value="#{linha.quantidade}" />
+				</p:column>
+				<p:column headerText="Status">
+					<h:outputText value="#{linha.status}" />
+				</p:column>
+				<p:column headerText="Ações">
+					<p:commandButton value="Atender" action="#{entregaMB.efetuar}" ajax="true" update=":form1">
+						<f:setPropertyActionListener target="#{entregaMB.pedido}" value="#{linha}" />
+					</p:commandButton>
+				</p:column>
+
+			</p:dataTable>
+		</h:form>
+	</p:panel>
+
+</h:body>
+</html>
