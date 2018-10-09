@@ -1,8 +1,9 @@
-package sim.persistence.jdbc;
+package sim.persistence.relatorio.jdbc;
 
 import java.util.ArrayList;
 import java.util.List;
-import sim.persistence.jdbc.Pedido;
+
+import sim.persistence.relatorio.jdbc.Pedido;
 
 
 public class PedidoDao extends Dao{

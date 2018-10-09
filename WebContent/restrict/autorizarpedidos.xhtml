@@ -34,16 +34,20 @@
 				<p:column headerText="Aplicação">
 					<h:outputText value="#{linha.aplicacao}" />
 				</p:column>
-				<p:column headerText="Andamento">
-					<h:outputText value="#{linha.urgencia}" />
-				</p:column>
 				<p:column headerText="Data de emissão">
 					<h:outputText value="#{linha.dataEmissao}" />
 				</p:column>
 				<p:column headerText="Status">
 					<h:outputText value="#{linha.status}" />
 				</p:column>
-
+				<p:column width="5%">
+					<p:commandButton update=":form2"
+						oncomplete="PF('material').show()" icon="ui-icon-search"
+						title="Ver mais dados">
+						<f:setPropertyActionListener value="#{linha}"
+							target="#{manterPedidoMB.pedido}" />
+					</p:commandButton>
+				</p:column>
 			</p:dataTable>
 			<br/>
 			<p:commandButton value="Aprovar" action="#{manterPedidoMB.aprovar}"
@@ -56,6 +60,27 @@
 
 		</h:form>
 	</p:panel>
+	<p:dialog header="Dados do material" widgetVar="material" modal="true">
+		<h:form id="form2">
+			<p:growl></p:growl>
+			<p:panelGrid columns="2">
+
+				<h:outputText value="Descrição do item" />
+				<p:inputTextarea value="#{manterPedidoMB.pedido.material.descricao}" readonly="true"
+								 rows="6" cols="60"  />
+								 
+				<h:outputText value="Observações" />
+				<p:inputTextarea value="#{manterPedidoMB.pedido.observacoes}" readonly="true"
+								 rows="6" cols="60"  />
+
+				<h:outputText value="UF" />
+				<p:inputText value="#{manterPedidoMB.pedido.material.uf.simboloUnidade}" readonly="true" />
+
+
+			</p:panelGrid>
+		</h:form>
+
+	</p:dialog>
 
 </h:body>
 </html>

@@ -1,4 +1,4 @@
-package sim.persistence.jdbc;
+package sim.persistence.relatorio.jdbc;
 
 import java.io.Serializable;
 import java.sql.Timestamp;

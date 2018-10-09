@@ -19,6 +19,7 @@ import sim.persistence.factory.DAOFactory;
 public class MantemPedidoMB {
 	
 	private PedidoDAO pedidoDao;
+	private Pedido pedido;
 	private ItemEstoqueDAO estoqueDao;
 	private ItemEstoque itemEstoque;
 	private List<Pedido> listaPorSetorPendentes;
@@ -30,6 +31,7 @@ public class MantemPedidoMB {
 	private LoginMB loginMB;
 	
 	public MantemPedidoMB() {
+		this.pedido = new Pedido();
 		this.pedidoDao = DAOFactory.criarPedidoDAO();
 		this.estoqueDao = DAOFactory.criarItemEstoqueDAO();
 
@@ -176,6 +178,14 @@ public class MantemPedidoMB {
 
 	public void setItemEstoque(ItemEstoque itemEstoque) {
 		this.itemEstoque = itemEstoque;
+	}
+
+	public Pedido getPedido() {
+		return pedido;
+	}
+
+	public void setPedido(Pedido pedido) {
+		this.pedido = pedido;
 	}
 
 }

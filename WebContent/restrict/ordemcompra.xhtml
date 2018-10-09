@@ -21,7 +21,7 @@
 					<p:growl></p:growl>
 			<p:panelGrid id="png1" columns="2">
 				<h:outputText value="Número da requisição de material:" />
-				<p:inputText id="ipt1" value="#{ordemCompraMB.numPedido}"/>
+				<p:inputText id="ipt1" value="#{ordemCompraMB.numPedido}" required="true"/>
 				
 				<h:outputText for="somForn" value="Fornecedor" id="optForn"/>
 						<p:selectOneMenu value="#{ordemCompraMB.fornecedor}" id="somForn2" >
@@ -33,7 +33,7 @@
 						</p:selectOneMenu>
 
 				<h:outputLabel value="Preço:" for="preco" />
-				<p:inputText id="preco" value="#{ordemCompraMB.preco}">
+				<p:inputText id="preco" value="#{ordemCompraMB.preco}" required="true">
 					<f:convertNumber  maxFractionDigits="2" minIntegerDigits="1"  />
 				</p:inputText>
 

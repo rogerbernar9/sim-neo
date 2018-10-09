@@ -1,4 +1,4 @@
-package sim.persistence.jdbc;
+package sim.persistence.relatorio.jdbc;
 
 public class AutorizacaoDao extends Dao {
 	

@@ -4,8 +4,8 @@ import java.util.ArrayList;
 import java.util.Collection;
 import java.util.List;
 
-import sim.persistence.jdbc.AutorizacaoDao;
-import sim.persistence.jdbc.AutorizacaoFornecimento;
+import sim.persistence.relatorio.jdbc.AutorizacaoDao;
+import sim.persistence.relatorio.jdbc.AutorizacaoFornecimento;
 
 public class AutorizacaoRela extends RelatorioUtils {
 

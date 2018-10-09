@@ -4,8 +4,8 @@ import java.util.ArrayList;
 import java.util.Collection;
 import java.util.List;
 
-import sim.persistence.jdbc.Pedido;
-import sim.persistence.jdbc.PedidoDao;
+import sim.persistence.relatorio.jdbc.Pedido;
+import sim.persistence.relatorio.jdbc.PedidoDao;
 
 
 public class RequisicaoRela extends RelatorioUtils {

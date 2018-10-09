@@ -1,16 +1,19 @@
-package sim.persistence.jdbc;
+package sim.persistence.relatorio.jdbc;
 
-public class AutorizacaoFornecimento {
+import java.sql.Timestamp;
+
+public class OrdemCompra {
 	
 	private Integer codigo;
+	private Timestamp dataEmissao;
+	private Float preco;
+	private Float quantidade;
+	private String simbolo;
+	private String descricao;
 	private String nomeFantasia;
 	private String logradouro;
 	private String numero;
 	private String cep;
-	private String cnpj;
-	private String descricao;
-	private Float quantidade;
-	private Float precoUf;
 	
 	
 	public Integer getCodigo() {
@@ -18,6 +21,30 @@ public class AutorizacaoFornecimento {
 	}
 	public void setCodigo(Integer codigo) {
 		this.codigo = codigo;
+	}
+	public Timestamp getDataEmissao() {
+		return dataEmissao;
+	}
+	public void setDataEmissao(Timestamp dataEmissao) {
+		this.dataEmissao = dataEmissao;
+	}
+	public Float getPreco() {
+		return preco;
+	}
+	public void setPreco(Float preco) {
+		this.preco = preco;
+	}
+	public Float getQuantidade() {
+		return quantidade;
+	}
+	public void setQuantidade(Float quantidade) {
+		this.quantidade = quantidade;
+	}
+	public String getSimbolo() {
+		return simbolo;
+	}
+	public void setSimbolo(String simbolo) {
+		this.simbolo = simbolo;
 	}
 	public String getNomeFantasia() {
 		return nomeFantasia;
@@ -43,31 +70,11 @@ public class AutorizacaoFornecimento {
 	public void setCep(String cep) {
 		this.cep = cep;
 	}
-	public String getCnpj() {
-		return cnpj;
-	}
-	public void setCnpj(String cnpj) {
-		this.cnpj = cnpj;
-	}
 	public String getDescricao() {
 		return descricao;
 	}
 	public void setDescricao(String descricao) {
 		this.descricao = descricao;
 	}
-	public Float getQuantidade() {
-		return quantidade;
-	}
-	public void setQuantidade(Float quantidade) {
-		this.quantidade = quantidade;
-	}
-	public Float getPrecoUf() {
-		return precoUf;
-	}
-	public void setPrecoUf(Float precoUf) {
-		this.precoUf = precoUf;
-	}
-	
-	
 
 }

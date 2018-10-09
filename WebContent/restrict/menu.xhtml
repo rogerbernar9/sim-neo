@@ -8,13 +8,14 @@
 	xmlns:ui="http://java.sun.com/jsf/facelets">
 <ui:composition>
 <h:head>
+	<h:outputStylesheet library="css" name="estilo.css"/>
 </h:head>
 
 <h:body>
 
 <h:form id="formMenu">
 	<p:menubar>
-	        <p:submenu label="Requisição de materiai">
+	        <p:submenu label="Requisição de materiais">
 	            <p:menuitem value="Nova requisição" url="/faces/restrict/pedido.xhtml" />
 	            <p:menuitem value="Autoriza/Cancela requisição" url="/faces/restrict/autorizarpedidos.xhtml" />
 	            <p:menuitem value="Consultar requisições emitidas" url="/faces/restrict/consultapedidos.xhtml" />

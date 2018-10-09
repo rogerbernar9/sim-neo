@@ -4,8 +4,8 @@ import java.util.ArrayList;
 import java.util.Collection;
 import java.util.List;
 
-import sim.persistence.jdbc.OrdemCompra;
-import sim.persistence.jdbc.OrdemCompraDao;
+import sim.persistence.relatorio.jdbc.OrdemCompra;
+import sim.persistence.relatorio.jdbc.OrdemCompraDao;
 
 
 public class OrdemCompraRela extends RelatorioUtils {
