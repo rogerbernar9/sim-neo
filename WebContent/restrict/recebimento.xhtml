@@ -40,9 +40,16 @@
 					<h:outputText value="#{linha.status}" />
 				</p:column>
 				<p:column headerText="Ações">
-					<p:commandButton value="Atender" action="#{entregaMB.efetuar}" ajax="true" update=":form1">
-						<f:setPropertyActionListener target="#{entregaMB.pedido}" value="#{linha}" />
-					</p:commandButton>
+					<h:commandLink action="#{entregaMB.efetuar}" title="Atender pedido">
+						<h:graphicImage library="imagens" name="ok.png" />
+						<f:setPropertyActionListener target="#{entregaMB.pedido}"
+							value="#{linha}" />
+					</h:commandLink>
+					<h:commandLink action="#{entregaMB.abrirRela}" target="_blank" title="Gerar PDF">
+						<h:graphicImage library="imagens" name="pdf.png" />
+						<f:setPropertyActionListener target="#{entregaMB.pedido}"
+							value="#{linha}" />
+					</h:commandLink>
 				</p:column>
 
 			</p:dataTable>

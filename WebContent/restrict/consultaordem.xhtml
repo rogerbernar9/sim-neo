@@ -39,7 +39,12 @@
 				<p:column headerText="Usuário">
 					<h:outputText value="#{linha.usuario.nome}" />
 				</p:column>
-				
+				<p:column headerText="Ações">
+					<h:commandLink action="#{ordemCompraMB.abrirRela}" target="_blank">
+						<h:graphicImage library="imagens" name="pdf.png" />
+						<f:setPropertyActionListener target="#{ordemCompraMB.ordemCompra}" value="#{linha}" />
+					</h:commandLink>
+				</p:column>
 
 			</p:dataTable>
 		</h:form>

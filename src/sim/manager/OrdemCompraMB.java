@@ -3,6 +3,7 @@ package sim.manager;
 import java.sql.Timestamp;
 import java.util.ArrayList;
 import java.util.Date;
+import java.util.HashMap;
 import java.util.Iterator;
 import java.util.List;
 
@@ -20,6 +21,9 @@ import sim.persistence.FornecedorDAO;
 import sim.persistence.OrdemCompraDAO;
 import sim.persistence.PedidoDAO;
 import sim.persistence.factory.DAOFactory;
+import sim.util.relatorio.OrdemCompraRela;
+import sim.util.relatorio.RelatorioUtils;
+import sim.util.relatorio.RequisicaoRela;
 
 @ManagedBean(name="ordemCompraMB")
 @RequestScoped
@@ -77,6 +81,20 @@ public class OrdemCompraMB {
 		return "ordemcompra";
 	}
 	
+	public void abrirRela()	{
+		FacesContext context = FacesContext.getCurrentInstance();
+		String nomeRelatorioJasper = "oc.jasper";
+		String nomeRelatorioSaida = "ordem de compra";
+		RelatorioUtils relatorioUtil = new OrdemCompraRela();
+		HashMap parametrosRelatorio = new HashMap();
+		try {
+			relatorioUtil.executaRelatorio(parametrosRelatorio, nomeRelatorioJasper, ordemCompra.getCodigo());
+		} catch (Exception e) {
+			e.printStackTrace();
+			context.addMessage(null, new FacesMessage(e.getMessage()));
+
+		} 
+	}
 	
 	public void gravar() {
 		FacesContext fc = FacesContext.getCurrentInstance();

@@ -39,7 +39,12 @@
 				<p:column headerText="Usuário/Setor">
 					<h:outputText value="#{linha.usuario.nome} / #{linha.usuario.setor}" />
 				</p:column>
-
+				<p:column headerText="Ações">
+					<h:commandLink action="#{pedidoMB.abrirRela}" target="_blank">
+						<h:graphicImage library="imagens" name="pdf.png" />
+						<f:setPropertyActionListener target="#{pedidoMB.pedido}" value="#{linha}" />
+					</h:commandLink>
+				</p:column>
 			</p:dataTable>
 		</h:form>
 	</p:panel>

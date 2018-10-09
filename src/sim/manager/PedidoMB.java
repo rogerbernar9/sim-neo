@@ -1,6 +1,7 @@
 package sim.manager;
 
 import java.sql.Timestamp;
+import java.util.HashMap;
 import java.util.List;
 import javax.faces.application.FacesMessage;
 import javax.faces.bean.ManagedBean;
@@ -17,6 +18,8 @@ import sim.persistence.MaterialDAO;
 import sim.persistence.PedidoDAO;
 import sim.persistence.UnidadeFornecimentoDAO;
 import sim.persistence.factory.DAOFactory;
+import sim.util.relatorio.RelatorioUtils;
+import sim.util.relatorio.RequisicaoRela;
 
 @ManagedBean(name="pedidoMB")
 @ViewScoped
@@ -104,6 +107,21 @@ public class PedidoMB {
 		this.material = new Material();
 		this.pedido = new Pedido();
 		this.simboloMaterial = null;
+	}
+	
+	public void abrirRela()	{
+		FacesContext context = FacesContext.getCurrentInstance();
+		String nomeRelatorioJasper = "requisicaomaterial.jasper";
+		String nomeRelatorioSaida = "requisicao";
+		RelatorioUtils relatorioUtil = new RequisicaoRela();
+		HashMap parametrosRelatorio = new HashMap();
+		try {
+			relatorioUtil.executaRelatorio(parametrosRelatorio, nomeRelatorioJasper, pedido.getCodigo());
+		} catch (Exception e) {
+			e.printStackTrace();
+			context.addMessage(null, new FacesMessage(e.getMessage()));
+
+		} 
 	}
     
     public String emitirPedido()	{
@@ -236,6 +254,7 @@ public class PedidoMB {
 
 
 	public List<Pedido> getPedidosPorSetor() {
+		this.pedidoDao = DAOFactory.criarPedidoDAO();
 		this.pedidosPorSetor = pedidoDao.listarPorSetor(loginMB.getUsuario());
 		return pedidosPorSetor;
 	}
