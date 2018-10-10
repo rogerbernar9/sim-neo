@@ -7,13 +7,8 @@
 	xmlns:f="http://java.sun.com/jsf/core"
 	xmlns:ui="http://java.sun.com/jsf/facelets">
 
-<h:head>
-</h:head>
-<h:body>
-<ui:insert name="menu">
-	<ui:include src="menu.xhtml" />
-</ui:insert>
-<br/>
+<ui:composition template="/restrict/template.xhtml">
+<ui:define name="corpo">
 <br/>
 	<p:dialog header="Cadastro de material" widgetVar="gravacao" modal="true">
 			<h:form id="form1">
@@ -130,6 +125,7 @@
 	
 	</p:dialog>
 	
-</h:body>
+</ui:define>
+</ui:composition>
 
 </html>

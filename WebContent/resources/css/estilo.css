@@ -1,0 +1,42 @@
+body {
+	font-family: Verdana, Arial, Helvetica, sans-serif;
+	font-size: 12px;
+	background: url('../imagens/bg-site.jpg') no-repeat center top #FAFAFA;
+}
+#container {
+	width: 90%;
+	height: 100%;
+	margin: 0 auto
+}
+#logotipo {
+	float: right;
+}
+	
+#titulo {
+	float: left;
+	font-size: 25pt;
+	font-variant: small-caps;
+	font-weight: bold;
+	height:50px;
+}
+
+#menu {
+
+	min-height: 50px;
+	padding: 3px;
+	clear:both;
+}
+
+#corpo {
+	margin-top: 10px;
+	margin-bottom: 10px;
+	min-height: 300px;
+}
+
+#rodape {
+	border-top: 1px dotted black;
+	height: 100px;
+	margin-top: 30px;
+	padding: 10px;
+	text-align: center;
+}

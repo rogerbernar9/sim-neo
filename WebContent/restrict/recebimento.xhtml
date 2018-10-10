@@ -7,14 +7,8 @@
 	xmlns:f="http://java.sun.com/jsf/core"
 	xmlns:ui="http://java.sun.com/jsf/facelets">
 
-
-<h:head>
-</h:head>
-<h:body>
-<ui:insert name="menu">
-	<ui:include src="menu.xhtml" />
-</ui:insert>
-<br/>
+<ui:composition template="/restrict/template.xhtml">
+<ui:define name="corpo">
 <br/>
 	<p:panel header="Setor de recebimento de materiais">
 		<h:form id="form1">
@@ -41,7 +35,7 @@
 				</p:column>
 				<p:column headerText="Ações">
 					<h:commandLink action="#{entregaMB.efetuar}" title="Atender pedido">
-						<h:graphicImage library="imagens" name="ok.png" />
+						<h:graphicImage library="imagens" name="approve.png" />
 						<f:setPropertyActionListener target="#{entregaMB.pedido}"
 							value="#{linha}" />
 					</h:commandLink>
@@ -55,6 +49,6 @@
 			</p:dataTable>
 		</h:form>
 	</p:panel>
-
-</h:body>
+</ui:define>
+</ui:composition>
 </html>

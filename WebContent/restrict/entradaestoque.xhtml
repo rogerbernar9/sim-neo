@@ -8,13 +8,8 @@
 	xmlns:ui="http://java.sun.com/jsf/facelets">
 
 
-<h:head>
-</h:head>
-<h:body>
-	<ui:insert name="menu">
-		<ui:include src="menu.xhtml" />
-	</ui:insert>
-	<br />
+<ui:composition template="/restrict/template.xhtml">
+<ui:define name="corpo">
 	<br />
 	<h:form id="form1">
 	<p:panel id="panel1" header="Entrada ou Saída de item no estoque">
@@ -99,5 +94,6 @@
 	</p:wizard>
 	</p:panel>
 </h:form>
-</h:body>
+</ui:define>
+</ui:composition>
 </html>

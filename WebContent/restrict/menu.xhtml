@@ -8,7 +8,6 @@
 	xmlns:ui="http://java.sun.com/jsf/facelets">
 <ui:composition>
 <h:head>
-	<h:outputStylesheet library="css" name="estilo.css"/>
 </h:head>
 
 <h:body>
@@ -23,7 +22,7 @@
 	 
 	        <p:submenu label="Catálogo de materiais">
 	            <p:submenu label="Unidade de fornecimento">
-                	<p:menuitem value="Consultar" url="/faces/restrict/admunidadeforn.xhtml" />
+                	<p:menuitem value="Editar" url="/faces/restrict/admunidadeforn.xhtml" />
             	</p:submenu>
             	<p:submenu label="Administrar">
             		<p:menuitem value="Editar catálogo" url="/faces/restrict/admmaterial.xhtml" />
@@ -40,7 +39,12 @@
 	        </p:submenu>
 
 	        <p:submenu label="Usuários">
-	        	<p:menuitem value="Administrar" url="/faces/restrict/admusuario.xhtml" />
+	        	    <p:submenu label="Administrar">
+            			<p:menuitem value="Usuario" url="/faces/restrict/admusuario.xhtml" />
+            			<p:menuitem value="Perfil de usuario" url="/faces/restrict/admperfil.xhtml" />
+	            		<p:menuitem value="Departamentos" url="/faces/restrict/admdepto.xhtml" />
+            		</p:submenu>
+	        	
 	        </p:submenu>
 	        
      	    <p:submenu label="Estoque">

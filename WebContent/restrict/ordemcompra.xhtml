@@ -7,13 +7,8 @@
 	xmlns:h="http://java.sun.com/jsf/html"
 	xmlns:f="http://java.sun.com/jsf/core">
 
-<h:head>
-</h:head>
-<h:body>
-<ui:insert name="menu">
-	<ui:include src="menu.xhtml" />
-</ui:insert>
-	<br />
+<ui:composition template="/restrict/template.xhtml">
+<ui:define name="corpo">
 	<br />
 	<h:form id="form1">
 		<p:panel id="pan1" header="Emissão de ordem de compra">
@@ -44,6 +39,7 @@
 		</p:panel>
 	</h:form>
 	
-</h:body>
+</ui:define>
+</ui:composition>
 
 </html>

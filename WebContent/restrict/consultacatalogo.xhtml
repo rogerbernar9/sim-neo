@@ -7,13 +7,8 @@
 	xmlns:f="http://java.sun.com/jsf/core"
 	xmlns:ui="http://java.sun.com/jsf/facelets">
 
-<h:head>
-</h:head>
-<h:body>
-<ui:insert name="menu">
-	<ui:include src="menu.xhtml" />
-</ui:insert>
-<br/>
+<ui:composition template="/restrict/template.xhtml">
+<ui:define name="corpo">
 <br/>
 	<br />
 	<p:panel header="Catálogo de materiais">
@@ -40,6 +35,7 @@
 		</h:form>
 	</p:panel>
 	
-</h:body>
+</ui:define>
+</ui:composition>
 
 </html>

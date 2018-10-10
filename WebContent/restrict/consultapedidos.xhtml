@@ -8,13 +8,8 @@
 	xmlns:ui="http://java.sun.com/jsf/facelets">
 
 
-<h:head>
-</h:head>
-<h:body>
-<ui:insert name="menu">
-	<ui:include src="menu.xhtml" />
-</ui:insert>
-<br/>
+<ui:composition template="/restrict/template.xhtml">
+<ui:define name="corpo">
 <br/>
 	<p:panel header="Consulta às Requisições de materiais emitidas pelo Setor">
 		<h:form id="form1">
@@ -40,7 +35,7 @@
 					<h:outputText value="#{linha.usuario.nome} / #{linha.usuario.setor}" />
 				</p:column>
 				<p:column headerText="Ações">
-					<h:commandLink action="#{pedidoMB.abrirRela}" target="_blank">
+					<h:commandLink action="#{pedidoMB.abrirRela}" target="_blank" title="Gerar PDF">
 						<h:graphicImage library="imagens" name="pdf.png" />
 						<f:setPropertyActionListener target="#{pedidoMB.pedido}" value="#{linha}" />
 					</h:commandLink>
@@ -49,5 +44,6 @@
 		</h:form>
 	</p:panel>
 
-</h:body>
+</ui:define>
+</ui:composition>
 </html>

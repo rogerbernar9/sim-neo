@@ -8,13 +8,8 @@
 	xmlns:ui="http://java.sun.com/jsf/facelets">
 
 
-<h:head>
-</h:head>
-<h:body>
-<ui:insert name="menu">
-	<ui:include src="menu.xhtml" />
-</ui:insert>
-<br/>
+<ui:composition template="/restrict/template.xhtml">
+<ui:define name="corpo">
 <br/>
 	<p:panel header="Emissão de requisição de material">
 		<h:form id="form1">
@@ -178,5 +173,6 @@
 	</p:panel>
 	<br/>
 	
-</h:body>
+</ui:define>
+</ui:composition>
 </html>
