@@ -11,6 +11,7 @@ import javax.faces.context.FacesContext;
 import sim.entity.Pedido;
 import sim.persistence.PedidoDAO;
 import sim.persistence.factory.DAOFactory;
+import sim.util.email.EnvioEmail;
 import sim.util.relatorio.AutorizacaoRela;
 import sim.util.relatorio.OrdemCompraRela;
 import sim.util.relatorio.RelatorioUtils;
@@ -30,14 +31,18 @@ public class RecebimentoMB {
 	
 	public void efetuar()	{
 		FacesContext fc = FacesContext.getCurrentInstance();
+		StringBuilder stb = new StringBuilder();
+		stb.append("Olá "+pedido.getUsuario().getNome()+" sua requisição de material nº"+pedido.getCodigo()+" aguarda retirada no setor de recebimento"
+				+ ". \nO setor de recebimento aguarda por você");
+		String assunto = "Requisição de material nº"+pedido.getCodigo();
 		try {
 			pedido.setStatus(Pedido.STATUS_FINAL);
 			pedidoDao.atualizar(pedido);
 			fc.addMessage(null, new FacesMessage("Requisição atendida!"));
+			//EnvioEmail.enviarEmail(pedido.getUsuario().getEmail(), assunto, stb.toString());
 		} catch (Exception e) {
 			fc.addMessage(null, new FacesMessage(FacesMessage.SEVERITY_ERROR,"Impossível realizar operação. erro "+e.getMessage(),""));
 		}
-		
 	}
 	
 	

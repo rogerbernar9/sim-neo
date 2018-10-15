@@ -46,14 +46,14 @@ public abstract class RelatorioUtils {
 
 			try {
 				FacesContext context = FacesContext.getCurrentInstance();
-				String caminhoRelatorio = context.getExternalContext().getRealPath("relatorios");
+				String caminhoRelatorio = context.getExternalContext().getRealPath("relatorio");
 				String caminhoArquivoJasper = caminhoRelatorio + File.separator + nomeRelatorioJasper;
 				String caminhoArquivoRelatorio = null;
 				
 				
 				JasperReport relatorioJasper = (JasperReport) JRLoader.loadObject(new File(caminhoArquivoJasper));
 				//JasperPrint impressoraJasper = JasperFillManager.fillReport(relatorioJasper, new HashMap(), new JRBeanCollectionDataSource(preencheObjeto(codigo)));
-				JasperPrint impressoraJasper = JasperFillManager.fillReport(relatorioJasper, new HashMap(), new JRBeanCollectionDataSource(preencheObjeto(codigo)));
+				JasperPrint impressoraJasper = JasperFillManager.fillReport(relatorioJasper, new HashMap(), new JRBeanCollectionDataSource(preencheObjeto(codigo), false));
 
 				JRExporter tipoArquivoExportado = null;
 				String extensaoArquivoExportado = "";
@@ -104,6 +104,7 @@ public abstract class RelatorioUtils {
 			context.responseComplete();
 		}
 	}
+
 	
 	
 	public abstract Collection preencheObjeto(Integer codigo);

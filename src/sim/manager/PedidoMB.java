@@ -21,6 +21,9 @@ import sim.persistence.factory.DAOFactory;
 import sim.util.relatorio.RelatorioUtils;
 import sim.util.relatorio.RequisicaoRela;
 
+import org.primefaces.model.DefaultStreamedContent;
+import org.primefaces.model.StreamedContent;
+
 @ManagedBean(name="pedidoMB")
 @ViewScoped
 public class PedidoMB {
@@ -35,6 +38,8 @@ public class PedidoMB {
 	private List<UnidadeFornecimento> listaUf;
 	private List<Pedido> pedidosPorSetor;
 	private String simboloMaterial;
+	private String numeroPedido;
+	private StreamedContent arquivoGerado;
 	private boolean pulo;
 	private boolean urgencia;
 	
@@ -107,6 +112,30 @@ public class PedidoMB {
 		this.material = new Material();
 		this.pedido = new Pedido();
 		this.simboloMaterial = null;
+	}
+	
+	public StreamedContent geraPedido()	{
+		inicializaObjetosDoPedido();
+
+		FacesContext fc = FacesContext.getCurrentInstance();
+		String nomeRelatorioJasper = "requisicaomaterial.jasper";
+		String nomeRelatorioSaida = "requisicao";
+		RelatorioUtils relatorioUtil = new RequisicaoRela();
+		HashMap parametrosRelatorio = new HashMap();
+		try {
+			this.pedido = this.pedidoDao.carregar(Integer.parseInt(numeroPedido));
+			if(this.pedido != null)
+				return relatorioUtil
+						.geraRelatorio(parametrosRelatorio, nomeRelatorioJasper, nomeRelatorioSaida,pedido.getCodigo());
+			
+			fc.addMessage(null, new FacesMessage(FacesMessage.SEVERITY_ERROR,"Pedido não encontrado!",""));  
+			return null;
+		} catch (Exception e) {
+			e.printStackTrace();
+			fc.addMessage(null, new FacesMessage(FacesMessage.SEVERITY_ERROR, e.getMessage(),""));
+			return null;
+		} 
+
 	}
 	
 	public void abrirRela()	{
@@ -262,6 +291,28 @@ public class PedidoMB {
 
 	public void setPedidosPorSetor(List<Pedido> pedidosPorSetor) {
 		this.pedidosPorSetor = pedidosPorSetor;
+	}
+
+
+	public String getNumeroPedido() {
+		return numeroPedido;
+	}
+
+
+	public void setNumeroPedido(String numeroPedido) {
+		this.numeroPedido = numeroPedido;
+	}
+
+
+	public StreamedContent getArquivoGerado() {
+		this.arquivoGerado = geraPedido();
+		
+		return arquivoGerado;
+	}
+
+
+	public void setArquivoGerado(StreamedContent arquivoGerado) {
+		this.arquivoGerado = arquivoGerado;
 	}
 
 }
