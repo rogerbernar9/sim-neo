@@ -1,0 +1,40 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" 
+    "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+
+<html xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:p="http://primefaces.org/ui"
+	xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:f="http://java.sun.com/jsf/core"
+	xmlns:ui="http://java.sun.com/jsf/facelets">
+<ui:composition>
+<h:head>
+</h:head>
+
+<h:body>
+
+<h:form id="formMenu">
+	<p:menubar>
+	        <p:submenu label="Requisição de materiais">
+	            <p:menuitem value="Nova requisição" url="/faces/restrict/pedido.xhtml" />
+	            <p:menuitem value="Autoriza/Cancela requisição" url="/faces/restrict/autorizarpedidos.xhtml" />
+	            <p:menuitem value="Consultar requisições emitidas" url="/faces/restrict/consultapedidos.xhtml" />
+	            <p:menuitem value="Consultar nova requisição" url="/faces/restrict/consultatodopedido.xhtml" />
+	        </p:submenu>
+	 
+	        <p:submenu label="Catálogo de materiais">
+            		<p:menuitem value="Consultar catálogo" url="/faces/restrict/consultacatalogo.xhtml" />
+	        </p:submenu>
+	        <p:submenu label="Balcão">
+	        	<p:menuitem value="Recebimento" url="/faces/restrict/recebimento.xhtml" />
+	        </p:submenu>
+	 
+	        <f:facet name="options">
+	        	<h:outputText value="Olá #{loginMB.usuario.nome}  " />
+	            <p:commandButton value="Logout" icon="ui-icon-extlink"
+	            				 action="#{loginMB.logout}" />
+	        </f:facet>
+	    </p:menubar>
+</h:form>
+</h:body>
+</ui:composition>
+</html>
